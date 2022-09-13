@@ -1,4 +1,4 @@
-.quizes-container{
+.quizes-container {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -7,10 +7,18 @@
     align-items: center;
 }
 
-.quiz-card{
+.quiz-card {
     display: flex;
-    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
     width: 100%;
     background-color: rgb(233, 233, 233);
     margin: 10px 0;
 }
+
+.quiz-info {
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+}
+

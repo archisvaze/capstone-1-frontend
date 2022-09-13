@@ -18,3 +18,15 @@ header {
     align-items: center;
     justify-content: space-between;
 }
+
+.alert{
+    position: fixed;
+    height: 60px;
+    width: 300px;
+    background-color: blue;
+    color: white;
+    left: 0;
+    right: 0;
+    margin: auto;
+    transition: 0.5s;
+}

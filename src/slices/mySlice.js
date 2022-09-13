@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 let startState = {};
 
-startState = { isLoggedIn: false, teacher: {}, myQuizes: [], myReports: [], tab: "My Quizes", newQuizDialog: false };
+startState = { isLoggedIn: false, teacher: {}, myQuizes: [], myReports: [], tab: "My Quizes", newQuizDialog: false, alert: ["", false, "error"] };
 if (localStorage.getItem("teacher-data")) {
     startState.teacher = JSON.parse(localStorage.getItem("teacher-data"));
     startState.isLoggedIn = true;
@@ -21,10 +21,11 @@ const mySlice = createSlice({
         },
         setLogout: (state, action) => {
             localStorage.clear();
-            state.teacher = {};
             state.isLoggedIn = false;
+            state.teacher = {}
             state.myQuizes = [];
             state.myReports = [];
+            state.newQuizDialog = false;
         },
         setMyQuizes: (state, action) => {
             state.myQuizes = action.payload
@@ -35,11 +36,14 @@ const mySlice = createSlice({
         setTab: (state, action) => {
             state.tab = action.payload;
         },
-        setNewQuizDialog : (state, action) => {
+        setNewQuizDialog: (state, action) => {
             state.newQuizDialog = action.payload;
-        }
+        },
+        setAlert: (state, action) => {
+            state.alert = action.payload;
+        },
     }
 })
 
-export const { setLogin, setLogout, setMyQuizes, setMyReports, setTab, setNewQuizDialog } = mySlice.actions;
+export const { setLogin, setLogout, setMyQuizes, setMyReports, setTab, setNewQuizDialog, setAlert } = mySlice.actions;
 export default mySlice.reducer;

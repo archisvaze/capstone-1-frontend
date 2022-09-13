@@ -29,7 +29,7 @@ export default function Login() {
           console.log(data.error)
         } else {
           dispatch(setLogin(data))
-          navigate('/home')
+          navigate('/')
         }
       })
 
