@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 let startState = {};
 
-startState = { isLoggedIn: false, teacher: {}, myQuizes: [], myReports: [], tab: "My Quizes", newQuizDialog: false, alert: ["", false, "error"] };
+startState = { isLoggedIn: false, teacher: {}, myQuizes: [], myReports: [], tab: "My Quizes", newQuizDialog: false, editQuizDialog: false, alert: ["", false, "error"] };
 if (localStorage.getItem("teacher-data")) {
     startState.teacher = JSON.parse(localStorage.getItem("teacher-data"));
     startState.isLoggedIn = true;
@@ -39,11 +39,14 @@ const mySlice = createSlice({
         setNewQuizDialog: (state, action) => {
             state.newQuizDialog = action.payload;
         },
+        setEditQuizDialog: (state, action) => {
+            state.editQuizDialog = action.payload;
+        },
         setAlert: (state, action) => {
             state.alert = action.payload;
         },
     }
 })
 
-export const { setLogin, setLogout, setMyQuizes, setMyReports, setTab, setNewQuizDialog, setAlert } = mySlice.actions;
+export const { setLogin, setLogout, setMyQuizes, setMyReports, setTab, setNewQuizDialog, setAlert, setEditQuizDialog } = mySlice.actions;
 export default mySlice.reducer;

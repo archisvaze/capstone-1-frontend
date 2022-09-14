@@ -49,10 +49,14 @@ export default function Home() {
       .then(data => {
         if (data.message) {
           dispatch(setNewQuizDialog(false));
+          setquizName("")
           dispatch(setAlert(["New Quiz Created", true, "alert"]))
           setTimeout(() => {
             dispatch(setAlert(["New Quiz Created", false, "alert"]))
           }, 2000)
+        }
+        else{
+          console.log(data)
         }
       })
 
@@ -68,16 +72,26 @@ export default function Home() {
       <div style={{ display: state.newQuizDialog === true ? "flex" : "none" }} className="new-quiz-dialog">
 
         <input onChange={(e) => {
+          e.stopPropagation();
           setquizName(e.target.value)
         }} type="text" placeholder='Enter A Title for your Quiz' value={quizName} />
 
-        <button onClick={() => { createNewQuiz() }}>Create Quiz</button>
+        <button onClick={(e) => {
+          createNewQuiz();
+          e.stopPropagation();
+        }}>Create Quiz</button>
 
-        <button onClick={() => dispatch(setNewQuizDialog(false))}>Cancel</button>
+        <button onClick={(e) => {
+          dispatch(setNewQuizDialog(false));
+          e.stopPropagation();
+        }}>Cancel</button>
 
 
       </div>
-      <div style={{ display: state.newQuizDialog === true ? "flex" : "none" }} className="new-quiz-filter"></div>
+      <div onClick={() => {
+        dispatch(setNewQuizDialog(false));
+        setquizName("")
+      }} style={{ display: state.newQuizDialog === true ? "flex" : "none" }} className="new-quiz-filter"></div>
 
     </div>
   )

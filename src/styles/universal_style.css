@@ -26,14 +26,15 @@
 }
 
 .new-quiz-dialog {
+    padding: 30px;
     position: fixed;
     top: 0;
     bottom: 0;
     left: 0;
     right: 0;
     margin: auto;
-    height: 400px;
-    width: 300px;
+    height: fit-content;
+    width: fit-content;
     border: 2px solid black;
     background-color: white;
     z-index: 4;
@@ -41,10 +42,6 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-}
-
-.new-quiz-dialog input{
-
 }
 
 .new-quiz-filter {
@@ -55,4 +52,23 @@
     right: 0;
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 3;
+}
+
+.edit-quiz-dialog {
+    padding: 30px;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    height: fit-content;
+    width: fit-content;
+    border: 2px solid black;
+    background-color: white;
+    z-index: 4;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }

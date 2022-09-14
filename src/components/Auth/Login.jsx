@@ -3,7 +3,7 @@ import "../../styles/login.css"
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { setLogin } from '../../slices/mySlice';
+import { setLogin, setAlert } from '../../slices/mySlice';
 
 
 
@@ -15,6 +15,7 @@ export default function Login() {
   const dispatch = useDispatch();
 
   const login = (values) => {
+    dispatch(setAlert(["Loging In...", true, "alert"]))
 
     const reqOptions = {
       method: 'POST',
@@ -28,6 +29,10 @@ export default function Login() {
         if (data.error) {
           console.log(data.error)
         } else {
+          dispatch(setAlert(["Loged In!", true, "alert"]))
+          setTimeout(() => {
+            dispatch(setAlert(["Loged In!", false, "alert"]))
+          }, 2000)
           dispatch(setLogin(data))
           navigate('/')
         }

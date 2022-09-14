@@ -19,7 +19,7 @@ header {
     justify-content: space-between;
 }
 
-.alert{
+.alert {
     position: fixed;
     height: 60px;
     width: 300px;
@@ -29,4 +29,5 @@ header {
     right: 0;
     margin: auto;
     transition: 0.5s;
+    z-index: 10;
 }
