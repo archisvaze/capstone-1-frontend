@@ -3,7 +3,19 @@ import { createSlice } from "@reduxjs/toolkit";
 
 let startState = {};
 
-startState = { isLoggedIn: false, teacher: {}, myQuizes: [], myReports: [], tab: "My Quizes", newQuizDialog: false, editQuizDialog: false, alert: ["", false, "error"], currQuiz: { name: "", questions: [], teacher: "", _id: "" }, student: "", connectedStudents: [] };
+startState = {
+    isLoggedIn: false,
+    teacher: {},
+    myQuizes: [],
+    myReports: [],
+    tab: "My Quizes",
+    newQuizDialog: false,
+    alert: ["", false, "error"],
+    currQuiz: { name: "", questions: [], teacher: "", _id: "" },
+    student: "",
+    connectedStudents: ["hi"],
+    clientID: "",
+};
 if (localStorage.getItem("teacher-data")) {
     startState.teacher = JSON.parse(localStorage.getItem("teacher-data"));
     startState.isLoggedIn = true;
@@ -39,9 +51,6 @@ const mySlice = createSlice({
         setNewQuizDialog: (state, action) => {
             state.newQuizDialog = action.payload;
         },
-        setEditQuizDialog: (state, action) => {
-            state.editQuizDialog = action.payload;
-        },
         setAlert: (state, action) => {
             state.alert = action.payload;
         },
@@ -52,15 +61,30 @@ const mySlice = createSlice({
             state.student = action.payload;
         },
         addStudent: (state, action) => {
-            let arr = JSON.parse(JSON.stringify(state.connectedStudents));
-            arr.unshift(action.payload);
-            state.connectedStudents = arr;
+           state.connectedStudents.push(action.payload)
         },
         clearStudents: (state, action) => {
             state.connectedStudents = [];
         },
+        setClientID: (state, action) => {
+            state.clientID = action.payload;
+        }
     }
 })
 
-export const { setLogin, setLogout, setMyQuizes, setMyReports, setTab, setNewQuizDialog, setAlert, setEditQuizDialog, setCurrQuiz, setStudent, addStudent, clearStudents } = mySlice.actions;
+export const {
+    setLogin,
+    setLogout,
+    setMyQuizes,
+    setMyReports,
+    setTab,
+    setNewQuizDialog,
+    setAlert,
+    setCurrQuiz,
+    setStudent,
+    addStudent,
+    clearStudents,
+    setClientID,
+
+} = mySlice.actions;
 export default mySlice.reducer;

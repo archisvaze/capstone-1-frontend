@@ -1,10 +1,9 @@
 import React, { useEffect } from 'react'
 import "../styles/myquizes.css"
 import { useDispatch, useSelector } from 'react-redux'
-import { setAlert } from '../slices/mySlice';
+import { clearStudents, setAlert } from '../slices/mySlice';
 import { Link } from 'react-router-dom';
 import socket from "../socketConfig";
-import { nanoid } from '@reduxjs/toolkit';
 import { useNavigate } from 'react-router-dom';
 
 export default function QuizCard(props) {
@@ -28,8 +27,8 @@ export default function QuizCard(props) {
     }
 
     //socket Connection
-    const createRoom = async () => {
-        socket.emit("create-room", { quiz: obj })
+    function createRoom() {
+        socket.emit("create-room", { quiz: obj, clientID: state.clientID })
     }
 
     useEffect(() => {
@@ -50,6 +49,7 @@ export default function QuizCard(props) {
 
             <button onClick={() => {
                 {
+                    dispatch(clearStudents())
                     createRoom();
                 }
             }} disabled={obj.questions.length === 0 ? true : false} className="start quiz-btn">Start</button>

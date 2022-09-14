@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { setLogout, addStudent, clearStudents } from '../../slices/mySlice';
+import { setLogout, addStudent } from '../../slices/mySlice';
 import socket from "../../socketConfig";
 import "../../styles/room.css"
 
@@ -18,9 +18,7 @@ export default function TeacherRoom() {
     const [start, setStart] = useState(false)
 
     useEffect(() => {
-        dispatch(clearStudents())
         getQuizData();
-
     }, [])
 
     const getQuizData = async () => {
@@ -42,14 +40,27 @@ export default function TeacherRoom() {
 
             })
     }
-
+    console.log(state.connectedStudents)
     //socket connections
     useEffect(() => {
-        console.log(state)
+        socket.on("join-request", data => {
+            console.log("join request recieved")
+            if (state.connectedStudents.includes(data.name)) {
+                console.log("name already includes : denied")
+                socket.emit("join-denied", data)
+            }
+            else {
+                console.log(state.connectedStudents)
+                console.log("name not found : granted")
+                socket.emit("join-granted", data)
+            }
+        })
         socket.on("student-connected", data => {
             console.log("Adding Student: " + data.name)
             dispatch(addStudent(data.name))
+            return;
         })
+
     }, [])
     return (
         <div className='teachers-room'>
@@ -58,7 +69,7 @@ export default function TeacherRoom() {
                 <h3>Connected Students</h3>
                 {state?.connectedStudents?.map(student => {
                     return (
-                        <p>{student}</p>
+                        <p key={student}>{student}</p>
                     )
                 })}
             </div>
