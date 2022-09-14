@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from "react-router-dom";
 import socket from '../socketConfig';
 import { setStudent, setAlert } from '../slices/mySlice';
+import "../styles/room.css"
 
 
 export default function StudentHome() {
@@ -20,23 +21,27 @@ export default function StudentHome() {
   const [name, setName] = useState("");
   const [quizID, setQuizID] = useState("");
 
-  const joinRoom = () => {
+  function joinRoom() {
     if (name !== "" && quizID !== "") {
-      socket.emit("join-room", { name, quizID })
+      socket.emit("join-room", {
+        name: name,
+        quizID: quizID,
+        clientID: state.clientID
+      })
     }
   }
 
   useEffect(() => {
-    socket.on("access-granted", data => {
-      console.log("access-granted")
+    socket.on("join-request-granted", data => {
+      console.log("join-request-granted")
       setName("");
       setQuizID("")
       dispatch(setStudent(data.name))
       navigate(`/room/${data.quizID}`)
     })
 
-    socket.on("access-denied", data => {
-      console.log("access-denied")
+    socket.on("join-request-denied", data => {
+      console.log("join-request-denied")
       alert("Student with same name already in Room", "error")
     })
 

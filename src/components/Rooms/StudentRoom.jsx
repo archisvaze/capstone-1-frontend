@@ -7,6 +7,7 @@ export default function Room() {
 
   useEffect(() => {
     getQuizData();
+
   }, [])
 
   const getQuizData = async () => {
