@@ -1,0 +1,11 @@
+.teachers-room,
+.student-room,
+.student-home {
+    padding-top: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 100%;
+    max-width: 1440px;
+    align-items: center;
+}

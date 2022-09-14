@@ -18,7 +18,7 @@ export default function Room() {
       })
   }
   return (
-    <div>
+    <div className='student-room'>
       <h1>StudentRoom</h1>
     </div>
 

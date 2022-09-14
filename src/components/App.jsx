@@ -6,6 +6,7 @@ import Header from './Header';
 import Home from './Home';
 import StudentRoom from "./Rooms/StudentRoom"
 import TeacherRoom from "./Rooms/TeacherRoom"
+import StudentHome from './StudentHome';
 
 export default function App() {
     return (
@@ -19,6 +20,7 @@ export default function App() {
                 <Route path="/:id" element={<EditQuiz />} />
                 <Route path="/room/:quizID" element={<StudentRoom />} />
                 <Route path="/teachers_room/:quizID" element={<TeacherRoom />} />
+                <Route path="/room/" element={<StudentHome />} />
             </Routes>
         </BrowserRouter>
 

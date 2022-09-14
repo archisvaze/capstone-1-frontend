@@ -33,11 +33,10 @@ export default function QuizCard(props) {
     }
 
     useEffect(() => {
-        socket.on("room-created", data => {
+        socket.once("room-created", data => {
             console.log("Room Created " + data.quiz._id);
             navigate(`/teachers_room/${data.quiz._id}`)
         })
-
     }, [])
 
 

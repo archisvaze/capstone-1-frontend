@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 let startState = {};
 
-startState = { isLoggedIn: false, teacher: {}, myQuizes: [], myReports: [], tab: "My Quizes", newQuizDialog: false, editQuizDialog: false, alert: ["", false, "error"], currQuiz: {name: "", questions: [], students: [], teacher: "", _id: ""} };
+startState = { isLoggedIn: false, teacher: {}, myQuizes: [], myReports: [], tab: "My Quizes", newQuizDialog: false, editQuizDialog: false, alert: ["", false, "error"], currQuiz: { name: "", questions: [], teacher: "", _id: "" }, student: "", connectedStudents: [] };
 if (localStorage.getItem("teacher-data")) {
     startState.teacher = JSON.parse(localStorage.getItem("teacher-data"));
     startState.isLoggedIn = true;
@@ -47,9 +47,20 @@ const mySlice = createSlice({
         },
         setCurrQuiz: (state, action) => {
             state.currQuiz = action.payload;
-        }
+        },
+        setStudent: (state, action) => {
+            state.student = action.payload;
+        },
+        addStudent: (state, action) => {
+            let arr = JSON.parse(JSON.stringify(state.connectedStudents));
+            arr.unshift(action.payload);
+            state.connectedStudents = arr;
+        },
+        clearStudents: (state, action) => {
+            state.connectedStudents = [];
+        },
     }
 })
 
-export const { setLogin, setLogout, setMyQuizes, setMyReports, setTab, setNewQuizDialog, setAlert, setEditQuizDialog, setCurrQuiz } = mySlice.actions;
+export const { setLogin, setLogout, setMyQuizes, setMyReports, setTab, setNewQuizDialog, setAlert, setEditQuizDialog, setCurrQuiz, setStudent, addStudent, clearStudents } = mySlice.actions;
 export default mySlice.reducer;
