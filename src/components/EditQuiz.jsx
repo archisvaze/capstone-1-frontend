@@ -3,18 +3,23 @@ import { useParams } from 'react-router-dom'
 import { setCurrQuiz } from '../slices/mySlice';
 import { useSelector, useDispatch } from 'react-redux'
 import { setAlert } from '../slices/mySlice';
+import { useNavigate } from 'react-router-dom';
 import "../styles/myquizes.css"
 
 export default function EditQuiz() {
     const state = useSelector((state) => state.myState);
+    const navigate = useNavigate();
     const dispatch = useDispatch();
     let { id } = useParams();
+
 
     useEffect(() => {
         fetch(`http://localhost:8000/quiz/${id}`)
             .then(res => res.json())
             .then(data => {
-                if (data.error) { }
+                if (data.error) {
+                    navigate("/");
+                }
                 else {
                     dispatch(setCurrQuiz(data))
                     console.log(data)
@@ -43,7 +48,7 @@ export default function EditQuiz() {
             alert("A Question must have atleast 2 choices!", "error")
             return;
         }
-        if(solution === null){
+        if (solution === null) {
             alert("Question needs an answer!", "error")
             return;
         }
@@ -99,7 +104,7 @@ export default function EditQuiz() {
                         <div className="choices">
                             {question.choices.map(choice => {
                                 return (
-                                    <p key={choice} className="choice">{choice}</p>
+                                    <p style={{ border: question.solution === choice ? "2px solid yellowgreen" : "2px solid transparent" }} key={choice} className="choice">{choice}</p>
                                 )
                             })}
                         </div>
@@ -110,22 +115,22 @@ export default function EditQuiz() {
 
             <input onChange={(e) => { setNewQuestion(e.target.value) }} type="text" placeholder='Question' value={newQuestion} />
 
-            <input style={{ border: solution === choice1 ? "2px solid green" : "2px solid transparent" }} onChange={(e) => { setChoice1(e.target.value) }} type="text" placeholder='Choice1' value={choice1} />
+            <input style={{ border: solution === choice1 ? "2px solid yellowgreen" : "2px solid transparent" }} onChange={(e) => { setChoice1(e.target.value) }} type="text" placeholder='Choice1' value={choice1} />
             <button onClick={() => {
                 if (choice1.length > 0) setSolution(choice1)
             }} className="solution">✔️</button>
 
-            <input style={{ border: solution === choice2 ? "2px solid green" : "2px solid transparent" }} onChange={(e) => { setChoice2(e.target.value) }} type="text" placeholder='Choice2' value={choice2} />
+            <input style={{ border: solution === choice2 ? "2px solid yellowgreen" : "2px solid transparent" }} onChange={(e) => { setChoice2(e.target.value) }} type="text" placeholder='Choice2' value={choice2} />
             <button onClick={() => {
                 if (choice2.length > 0) setSolution(choice2)
             }} className="solution">✔️</button>
 
-            <input style={{ border: solution === choice3 ? "2px solid green" : "2px solid transparent" }} onChange={(e) => { setChoice3(e.target.value) }} type="text" placeholder='Choice3' value={choice3} />
+            <input style={{ border: solution === choice3 ? "2px solid yellowgreen" : "2px solid transparent" }} onChange={(e) => { setChoice3(e.target.value) }} type="text" placeholder='Choice3' value={choice3} />
             <button onClick={() => {
                 if (choice3.length > 0) setSolution(choice3)
             }} className="solution">✔️</button>
 
-            <input style={{ border: solution === choice4 ? "2px solid green" : "2px solid transparent" }} onChange={(e) => { setChoice4(e.target.value) }} type="text" placeholder='Choice4' value={choice4} />
+            <input style={{ border: solution === choice4 ? "2px solid yellowgreen" : "2px solid transparent" }} onChange={(e) => { setChoice4(e.target.value) }} type="text" placeholder='Choice4' value={choice4} />
             <button onClick={() => {
                 if (choice4.length > 0) setSolution(choice4)
             }} className="solution">✔️</button>

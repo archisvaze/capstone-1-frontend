@@ -6,7 +6,6 @@ import MyQuizes from './MyQuizes';
 import MyReports from './MyReports';
 
 
-
 export default function Home() {
   const state = useSelector((state) => state.myState);
   const dispatch = useDispatch();
@@ -55,13 +54,13 @@ export default function Home() {
             dispatch(setAlert(["New Quiz Created", false, "alert"]))
           }, 2000)
         }
-        else{
+        else {
           console.log(data)
         }
       })
 
   }
-
+  
   return (
     <div className='home-page'>
 

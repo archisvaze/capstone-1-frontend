@@ -4,6 +4,8 @@ import Login from './Auth/Login';
 import EditQuiz from './EditQuiz';
 import Header from './Header';
 import Home from './Home';
+import StudentRoom from "./Rooms/StudentRoom"
+import TeacherRoom from "./Rooms/TeacherRoom"
 
 export default function App() {
     return (
@@ -15,6 +17,8 @@ export default function App() {
                 <Route path="/login" element={<Login />} />
                 <Route path="/" element={<Home />} />
                 <Route path="/:id" element={<EditQuiz />} />
+                <Route path="/room/:quizID" element={<StudentRoom />} />
+                <Route path="/teachers_room/:quizID" element={<TeacherRoom />} />
             </Routes>
         </BrowserRouter>
 

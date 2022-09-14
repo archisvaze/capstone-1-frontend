@@ -1,12 +1,16 @@
-import React, { useState } from 'react'
+import React, { useEffect } from 'react'
 import "../styles/myquizes.css"
 import { useDispatch, useSelector } from 'react-redux'
 import { setAlert } from '../slices/mySlice';
 import { Link } from 'react-router-dom';
+import socket from "../socketConfig";
+import { nanoid } from '@reduxjs/toolkit';
+import { useNavigate } from 'react-router-dom';
 
 export default function QuizCard(props) {
     const dispatch = useDispatch();
     const state = useSelector((state) => state.myState);
+    const navigate = useNavigate();
     let obj = props.obj;
 
     const deleteQuiz = async () => {
@@ -23,6 +27,20 @@ export default function QuizCard(props) {
             })
     }
 
+    //socket Connection
+    const createRoom = async () => {
+        socket.emit("create-room", { quiz: obj })
+    }
+
+    useEffect(() => {
+        socket.on("room-created", data => {
+            console.log("Room Created " + data.quiz._id);
+            navigate(`/teachers_room/${data.quiz._id}`)
+        })
+
+    }, [])
+
+
     return (
         <div className='quiz-card'>
 
@@ -31,7 +49,11 @@ export default function QuizCard(props) {
                 <p>Number of Questions: {obj.questions.length}</p>
             </div>
 
-            <button disabled={obj.questions.length === 0 ? true : false} className="start quiz-btn">Start</button>
+            <button onClick={() => {
+                {
+                    createRoom();
+                }
+            }} disabled={obj.questions.length === 0 ? true : false} className="start quiz-btn">Start</button>
 
             <div className="quiz-actions">
                 <Link to={`/${obj._id}`}>
