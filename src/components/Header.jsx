@@ -14,9 +14,15 @@ export default function Header() {
                 <div style={{ top: state.alert[1] === true ? "90px" : "-10vh" }} className="alert">{state.alert[0]}</div>
                 <div className="header-logo">QUIZAPP</div>
                 <nav style={{ display: state.isLoggedIn === true ? "flex" : "none" }}>
-                    <button onClick={() => dispatch(setTab("My Quizes"))}>My Quizes</button>
+                    <button onClick={() => {
+                        dispatch(setTab("My Quizes"))
+                        navigate("/")
+                    }}>My Quizes</button>
 
-                    <button onClick={() => dispatch(setTab("My Reports"))}>My Reports</button>
+                    <button onClick={() => {
+                        dispatch(setTab("My Reports"))
+                        navigate("/")
+                    }}>My Reports</button>
                 </nav>
                 <button
                     onClick={() => {
