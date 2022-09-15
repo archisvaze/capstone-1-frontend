@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
 import "../../styles/room.css"
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import socket from '../../socketConfig';
+import { setCurrQuizRoom } from '../../slices/mySlice';
 
 
 
 export default function Room() {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const state = useSelector(state => state.myState);
   let { quizID } = useParams();
@@ -16,6 +18,9 @@ export default function Room() {
   const [start, setStart] = useState(false)
   const [index, setIndex] = useState(0)
   const [answered, setAnswered] = useState(["", false])
+  const [quizStatus, setQuizStatus] = useState("not-started");
+  const [report, setReport] = useState({})
+
 
 
   useEffect(() => {
@@ -44,6 +49,7 @@ export default function Room() {
   useEffect(() => {
     socket.on("quiz-started", data => {
       console.log("quiz is starting")
+      setQuizStatus("started")
       setStart(true);
       setIndex(0)
     })
@@ -51,6 +57,11 @@ export default function Room() {
       setAnswered(["", false])
       console.log("next question coming up")
       setIndex(data.index)
+    })
+    socket.on("report", room => {
+      setQuizStatus("ended")
+      dispatch(setCurrQuizRoom(room));
+
     })
   }, [])
 
@@ -64,12 +75,30 @@ export default function Room() {
     socket.emit("student-answer", { quizID: quiz._id, answer: answerObj })
   }
 
+  //calculate scores
+  useEffect(() => {
+    let studentsReport = {};
+    if (state.currQuizRoom.report) {
+      for (let student_report of state.currQuizRoom?.report) {
+        studentsReport[student_report.student] = 0;
+        for (let answer of student_report.answers) {
+          if (answer.point === 1) {
+            studentsReport[student_report.student] += 1;
+          }
+        }
+      }
+      console.log(studentsReport);
+      setReport(studentsReport);
+
+    }
+  }, [state.currQuizRoom])
+
   return (
     <div className='student-room'>
       <h1>StudentRoom</h1>
       <h3 style={{ display: start === false ? "flex" : "none" }}>Waiting for Quiz to Start</h3>
 
-      <div style={{ display: start === true ? "flex" : "none" }} className="student-quiz">
+      <div style={{ display: quizStatus === "started" ? "flex" : "none" }} className="student-quiz">
         <h2>{quiz?.questions[index]?.question}</h2>
 
         <button disabled={answered[1]}
@@ -101,6 +130,27 @@ export default function Room() {
         >{quiz.questions[index]?.choices[3]}</button>
 
       </div>
+
+
+      <div style={{ display: quizStatus === "ended" ? "flex" : "none" }} className="student-room-report">
+
+        <h3>Quiz Over</h3>
+
+        <div className="score-card">
+          {Object.keys(report).map((student, index) => {
+            return (
+              <div key={student} className="student-score">
+                <p>Student: {student}</p>
+                <p>Score: {Object.values(report)[index]}</p>
+              </div>
+            )
+          })}
+        </div>
+
+      </div>
+
+
+
     </div>
 
   )

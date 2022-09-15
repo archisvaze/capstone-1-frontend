@@ -25,3 +25,7 @@
     margin: 5px;
     border: 2px solid black;
 }
+.student-room-report{
+    display: flex;
+    flex-direction: column;
+}
