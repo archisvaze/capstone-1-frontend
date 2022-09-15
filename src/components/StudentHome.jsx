@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from "react-router-dom";
 import socket from '../socketConfig';
 import { setStudent, setAlert } from '../slices/mySlice';
-import "../styles/room.css"
+import "../styles/studenthome.css"
 
 
 export default function StudentHome() {
@@ -56,20 +56,27 @@ export default function StudentHome() {
   return (
     <div className='student-home'>
 
-      <input onChange={(e) => setName(e.target.value)} type="text" placeholder='Enter Your Name' value={name} />
-      <input onChange={(e) => setQuizID(e.target.value)} type="text" placeholder='Enter Room ID' value={quizID} />
-      <button 
-      style={{backgroundColor: "#2dc4c0"}}
-      onClick={() => {
-        {
-          joinRoom();
-        }
-      }}>Enter</button>
+      <div className="main">
+        <input onChange={(e) => setName(e.target.value)} type="text" placeholder='Enter Your Name' value={name} />
+        <input onChange={(e) => setQuizID(e.target.value)} type="text" placeholder='Enter Room ID' value={quizID} />
+        <button
+          style={{ backgroundColor: "#2dc4c0", fontSize: "16px" }}
+          onClick={() => {
+            {
+              joinRoom();
+            }
+          }}>Enter</button>
+      </div>
 
-      <p>Are you a Teacher?</p>
-      <button onClick={() => {
-        navigate("/login")
-      }}>Login</button>
+      <div className="teacher-container">
+        <p>Are you a Teacher?</p>
+        <button
+          style={{ backgroundColor: "tomato", fontSize: "16px" }}
+          onClick={() => {
+            navigate("/login")
+          }}>Login</button>
+      </div>
+
 
     </div>
   )

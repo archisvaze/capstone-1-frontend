@@ -5,12 +5,23 @@ import { setCurrQuizRoom, setAlert } from '../slices/mySlice';
 import { Link } from 'react-router-dom';
 import socket from "../socketConfig";
 import { useNavigate } from 'react-router-dom';
+import edit from "../icons/edit.svg"
+import trash from "../icons/trash.svg"
+import play from "../icons/play.svg"
+
 
 export default function QuizCard(props) {
     const dispatch = useDispatch();
     const state = useSelector((state) => state.myState);
     const navigate = useNavigate();
     let obj = props.obj;
+
+    function alert(text, flag) {
+        dispatch(setAlert([text, true, flag]))
+        setTimeout(() => {
+            dispatch(setAlert([text, false, flag]))
+        }, 2000)
+    }
 
     const deleteQuiz = async () => {
         dispatch(setAlert(["Deleting Quiz...", true, "alert"]))
@@ -28,10 +39,15 @@ export default function QuizCard(props) {
 
     //socket Connection
     function createRoom() {
-        dispatch(setCurrQuizRoom({ students: [], report: [] }))
-        console.log("destroying previous room")
-        socket.emit("destroy-room", { quiz: obj, clientID: state.clientID });
-        socket.emit("create-room", { quiz: obj, clientID: state.clientID })
+        if (obj.questions.length === 0) {
+            alert("Quiz must have atleast 1 question to start!", "error")
+        }
+        else {
+            dispatch(setCurrQuizRoom({ students: [], report: [] }))
+            console.log("destroying previous room")
+            socket.emit("destroy-room", { quiz: obj, clientID: state.clientID });
+            socket.emit("create-room", { quiz: obj, clientID: state.clientID })
+        }
     }
 
     useEffect(() => {
@@ -50,20 +66,20 @@ export default function QuizCard(props) {
                 <p>Number of Questions: {obj.questions.length}</p>
             </div>
 
-            <button style={{background: "mediumseagreen"}} onClick={() => {
+            <button style={{ background: "mediumseagreen" }} onClick={() => {
                 {
                     createRoom();
                 }
-            }} disabled={obj.questions.length === 0 ? true : false} className="start quiz-btn">Start</button>
+            }} className="start-btn" > <img src={play} alt="" /> </button>
 
             <div className="quiz-actions">
                 <Link to={`/${obj._id}`}>
-                    <button className="edit quiz-btn">Edit</button>
+                    <button><img src={edit} alt="" /></button>
                 </Link>
 
                 <button onClick={() => {
                     deleteQuiz();
-                }} className="delete quiz-btn">Delete</button>
+                }}><img src={trash} alt="" /></button>
             </div>
         </div>
     )

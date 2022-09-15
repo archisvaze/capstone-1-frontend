@@ -13,7 +13,7 @@ export default function Header() {
             <div
                 style={{ justifyContent: state.isLoggedIn === true ? "space-between" : "center" }}
                 className="header-container">
-                <div style={{ top: state.alert[1] === true ? "90px" : "-20vh", backgroundColor: state.alert[2] === "error" ? "tomato" : "mediumseagreen" }} className="alert">{state.alert[0]}</div>
+                <div style={{ top: state.alert[1] === true ? "90px" : "-20vh", backgroundColor: state.alert[2] === "error" ? "crimson" : "mediumseagreen" }} className="alert">{state.alert[0]}</div>
                 <h1 style={{ textAlign: "center" }} className="header-logo">QUIZACE</h1>
                 <nav style={{ display: state.isLoggedIn === true ? "flex" : "none" }}>
                     <button

@@ -92,7 +92,7 @@ export default function Login() {
               component="div" />
 
             <button
-              style={{ backgroundColor: "mediumseagreen" }}
+              style={{ backgroundColor: "mediumseagreen", fontSize: "16px" }}
               id="submit-btn"
               type='submit'
               disabled={isSubmitting}
