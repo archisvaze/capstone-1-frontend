@@ -70,7 +70,7 @@ export default function QuizCard(props) {
                 {
                     createRoom();
                 }
-            }} className="start-btn" > <img src={play} alt="" /> </button>
+            }} className="start-btn" >Start Quiz<img src={play} alt="" /> </button>
 
             <div className="quiz-actions">
                 <Link to={`/${obj._id}`}>

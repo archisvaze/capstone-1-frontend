@@ -106,12 +106,12 @@ button {
     border-radius: 10px;
 }
 
-button:hover{
+button:hover {
     transform: translateY(-2px);
     box-shadow: 0 11px #ffffff80;
 }
 
-button:active{
+button:active {
     transform: translateY(4px);
     box-shadow: 0 5px #ffffff33;
 }
@@ -122,7 +122,7 @@ a {
 
 input {
     width: 90vw;
-    height: 60px;
+    height: 50px;
     max-width: 600px;
     border: none;
     background-color: #274250;
@@ -132,6 +132,52 @@ input {
     color: white;
     margin-top: 30px;
     margin-bottom: 9px;
-    font-size: 20px;
+    font-size: 16px;
     box-shadow: 0 9px #102129;
+}
+
+
+
+/*Media Querries for mobile*/
+
+@media screen and (min-width: 0px) and (max-width: 650px) {
+    button {
+        font-size: 12px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        padding: 5px 10px;
+        color: white;
+        border: none;
+        outline: none;
+        box-shadow: 0 5px #ffffff4d;
+        border-radius: 10px;
+    }
+
+    button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 7px #ffffff80;
+    }
+
+    button:active {
+        transform: translateY(4px);
+        box-shadow: 0 1px #ffffff33;
+    }
+
+    input {
+        width: 90vw;
+        height: 40px;
+        max-width: 600px;
+        border: none;
+        background-color: #274250;
+        padding: 5px 10px;
+        border-radius: 10px;
+        outline: none;
+        color: white;
+        margin-top: 15px;
+        margin-bottom: 5px;
+        font-size: 14px;
+        box-shadow: 0 9px #102129;
+    }
 }

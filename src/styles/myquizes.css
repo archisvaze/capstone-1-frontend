@@ -27,35 +27,3 @@
     gap: 20px;
 }
 
-.edit-quiz-page {
-    padding-top: 100px;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    width: 100%;
-    max-width: 1440px;
-    align-items: center;
-}
-
-.quiz-actions {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 20px;
-}
-
-.choice{
-    position: relative;
-}
-
-.choice button{
-    position: absolute;
-    top: 38px;
-    right: 10px;
-
-}
-
-.start-btn:hover{
-    
-}

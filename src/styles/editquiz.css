@@ -7,3 +7,55 @@
     box-shadow: 4px 10px 15px 4px rgba(0, 0, 0, 0.30);
     padding: 10px;
 }
+
+.start-btn {
+    font-size: 14px;
+    gap: 10px;
+}
+
+
+.edit-quiz-page {
+    padding-top: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 100%;
+    max-width: 1440px;
+    align-items: center;
+}
+
+.quiz-actions {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.choice {
+    position: relative;
+}
+
+.choice button {
+    height: 30px;
+    width: 30px;
+    position: absolute;
+    top: 35px;
+    right: 10px;
+
+}
+
+
+/*Media Querries for mobile*/
+
+@media screen and (min-width: 0px) and (max-width: 650px) {
+
+    .choice button {
+        height: 30px;
+        width: 30px;
+        position: absolute;
+        top: 17px;
+        right: 10px;
+
+    }
+}
