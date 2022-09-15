@@ -11,7 +11,7 @@ export default function Header() {
     return (
         <header>
             <div className="header-container">
-                <div style={{ top: state.alert[1] === true ? "90px" : "-10vh" }} className="alert">{state.alert[0]}</div>
+                <div style={{ top: state.alert[1] === true ? "90px" : "-10vh", backgroundColor: state.alert[2] === "error" ? "red" : "blue" }} className="alert">{state.alert[0]}</div>
                 <div className="header-logo">QUIZAPP</div>
                 <nav style={{ display: state.isLoggedIn === true ? "flex" : "none" }}>
                     <button onClick={() => {

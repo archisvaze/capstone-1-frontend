@@ -60,9 +60,9 @@ export default function TeacherRoom() {
         setIndex(nextIndex);
     }
 
-    function endQuiz(){
+    function endQuiz() {
         setQuizStatus("ended");
-        
+
     }
 
     //socket connections
@@ -93,11 +93,21 @@ export default function TeacherRoom() {
         <div className='teachers-room'>
             <h1>TeachersRoom</h1>
 
-            <button onClick={() => {
-                {
-                    startQuiz();
-                }
-            }} className="start-quiz-btn">Start Quiz</button>
+            <button style={{ display: quizStatus === "not-started" ? "flex" : "none" }}
+                onClick={() => {
+                    {
+                        startQuiz();
+                    }
+                }} className="start-quiz-btn">Start Quiz</button>
+
+
+            <button style={{ display: quizStatus === "not-started" ? "none" : "flex" }}
+                onClick={() => {
+                    {
+
+                    }
+                }}
+            >End Quiz</button>
 
             <div className="connected-students">
                 <h3>Connected Students</h3>
@@ -118,11 +128,7 @@ export default function TeacherRoom() {
                     }
                 }}>Next</button>
 
-                <button 
-                onClick={() => {{
 
-                }}}
-                >End Quiz</button>
             </div>
         </div>
     )
