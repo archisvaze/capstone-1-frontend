@@ -16,7 +16,8 @@ export default function TeacherRoom() {
     //varaibles
     const [quiz, setQuiz] = useState({ questions: [], choices: [] })
     const [start, setStart] = useState(false)
-    const [index, setIndex] = useState(0)
+    const [index, setIndex] = useState(0);
+    const [report, setReport] = useState({})
 
     useEffect(() => {
         getQuizData();

@@ -15,6 +15,7 @@ export default function Room() {
   const [quiz, setQuiz] = useState({ questions: [], choices: [] })
   const [start, setStart] = useState(false)
   const [index, setIndex] = useState(0)
+  const [answered, setAnswered] = useState(["", false])
 
 
   useEffect(() => {
@@ -47,11 +48,21 @@ export default function Room() {
       setIndex(0)
     })
     socket.on('question-nexted', data => {
+      setAnswered(["", false])
       console.log("next question coming up")
       setIndex(data.index)
     })
   }, [])
 
+  function answer(answer) {
+    setAnswered([answer, true])
+    let answerObj = {
+      student: state.student,
+      question: quiz?.questions[index]?.question,
+      answer: answer
+    }
+    socket.emit({ quizID: quiz._id, answer: answerObj })
+  }
 
   return (
     <div className='student-room'>
@@ -60,10 +71,35 @@ export default function Room() {
 
       <div style={{ display: start === true ? "flex" : "none" }} className="student-quiz">
         <h2>{quiz?.questions[index]?.question}</h2>
-        <button>{quiz.questions[index]?.choices[0]}</button>
-        <button>{quiz.questions[index]?.choices[1]}</button>
-        <button>{quiz.questions[index]?.choices[2]}</button>
-        <button>{quiz.questions[index]?.choices[3]}</button>
+
+        <button disabled={answered[1]}
+          style={{ border: answered[0] === quiz.questions[index]?.choices[0] ? "2px solid yellowgreen" : "2px solid transparent" }}
+          onClick={() => {
+            answer(quiz.questions[index]?.choices[0])
+          }}
+        >{quiz.questions[index]?.choices[0]}</button>
+
+        <button disabled={answered[1]}
+          style={{ border: answered[0] === quiz.questions[index]?.choices[1] ? "2px solid yellowgreen" : "2px solid transparent" }}
+          onClick={() => {
+            answer(quiz.questions[index]?.choices[1])
+          }}
+        >{quiz.questions[index]?.choices[1]}</button>
+
+        <button disabled={answered[1]}
+          style={{ border: answered[0] === quiz.questions[index]?.choices[2] ? "2px solid yellowgreen" : "2px solid transparent" }}
+          onClick={() => {
+            answer(quiz.questions[index]?.choices[2])
+          }}
+        >{quiz.questions[index]?.choices[2]}</button>
+
+        <button disabled={answered[1]}
+          style={{ border: answered[0] === quiz.questions[index]?.choices[3] ? "2px solid yellowgreen" : "2px solid transparent" }}
+          onClick={() => {
+            answer(quiz.questions[index]?.choices[3])
+          }}
+        >{quiz.questions[index]?.choices[3]}</button>
+
       </div>
     </div>
 
