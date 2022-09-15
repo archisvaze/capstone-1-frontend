@@ -45,6 +45,11 @@ export default function StudentHome() {
       alert("Student with same name already in Room", "error")
     })
 
+    socket.on("room-busy", data => {
+      console.log("Quiz in Progess on Ended")
+      alert("The Quiz is already in progess or has ended", "error")
+    })
+
   }, [])
 
 

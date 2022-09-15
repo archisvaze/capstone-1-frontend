@@ -61,7 +61,7 @@ export default function Room() {
       question: quiz?.questions[index]?.question,
       answer: answer
     }
-    socket.emit({ quizID: quiz._id, answer: answerObj })
+    socket.emit("student-answer", { quizID: quiz._id, answer: answerObj })
   }
 
   return (

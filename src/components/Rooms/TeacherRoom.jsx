@@ -17,7 +17,8 @@ export default function TeacherRoom() {
     const [quiz, setQuiz] = useState({ questions: [], choices: [] })
     const [start, setStart] = useState(false)
     const [index, setIndex] = useState(0);
-    const [report, setReport] = useState({})
+    const [report, setReport] = useState([])
+    const [quizStatus, setQuizStatus] = useState("not-started")
 
     useEffect(() => {
         getQuizData();
@@ -45,6 +46,7 @@ export default function TeacherRoom() {
 
 
     function startQuiz() {
+        setQuizStatus("started")
         console.log("starting quiz...")
         socket.emit("start-quiz", { quizID: quiz._id });
         setStart(true)
@@ -58,6 +60,10 @@ export default function TeacherRoom() {
         setIndex(nextIndex);
     }
 
+    function endQuiz(){
+        setQuizStatus("ended");
+        
+    }
 
     //socket connections
     useEffect(() => {
@@ -67,6 +73,21 @@ export default function TeacherRoom() {
             dispatch(setCurrQuizRoom(room))
             return;
         })
+
+        //quiz logic
+        socket.on("student-answered", data => {
+            let updatedReport = JSON.parse(JSON.stringify(report))
+            if (updatedReport[data.answer.student]) {
+                updatedReport[data.answer.student].push({ question: data.answer.question, answer: data.answer.answer })
+            }
+            else {
+                updatedReport[data.answer.student] = [{ question: data.answer.question, answer: data.answer.answer }]
+            }
+            setReport(updatedReport)
+            console.log(`${data.answer.student} answered: ${data.answer.answer}`)
+            console.log("answer added to report")
+        })
+
     }, [])
     return (
         <div className='teachers-room'>
@@ -91,9 +112,17 @@ export default function TeacherRoom() {
 
             <div style={{ display: start === true ? "flex" : "none" }} className="teacher-quiz">
                 <h2>{quiz?.questions[index]?.question}</h2>
-                <button onClick={() => {{
-                    nextQuestion();
-                }}}>Next</button>
+                <button onClick={() => {
+                    {
+                        nextQuestion();
+                    }
+                }}>Next</button>
+
+                <button 
+                onClick={() => {{
+
+                }}}
+                >End Quiz</button>
             </div>
         </div>
     )
