@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import "../styles/myquizes.css"
 import { useDispatch, useSelector } from 'react-redux'
-import { clearStudents, setAlert } from '../slices/mySlice';
+import { setCurrQuizRoom, setAlert } from '../slices/mySlice';
 import { Link } from 'react-router-dom';
 import socket from "../socketConfig";
 import { useNavigate } from 'react-router-dom';
@@ -28,6 +28,9 @@ export default function QuizCard(props) {
 
     //socket Connection
     function createRoom() {
+        dispatch(setCurrQuizRoom({students: []}))
+        console.log("destroying previous room")
+        socket.emit("destroy-room", { quiz: obj, clientID: state.clientID });
         socket.emit("create-room", { quiz: obj, clientID: state.clientID })
     }
 
@@ -49,7 +52,6 @@ export default function QuizCard(props) {
 
             <button onClick={() => {
                 {
-                    dispatch(clearStudents())
                     createRoom();
                 }
             }} disabled={obj.questions.length === 0 ? true : false} className="start quiz-btn">Start</button>

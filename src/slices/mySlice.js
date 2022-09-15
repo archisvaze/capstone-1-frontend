@@ -13,7 +13,7 @@ startState = {
     alert: ["", false, "error"],
     currQuiz: { name: "", questions: [], teacher: "", _id: "" },
     student: "",
-    connectedStudents: ["hi"],
+    currQuizRoom: {},
     clientID: "",
 };
 if (localStorage.getItem("teacher-data")) {
@@ -60,11 +60,8 @@ const mySlice = createSlice({
         setStudent: (state, action) => {
             state.student = action.payload;
         },
-        addStudent: (state, action) => {
-           state.connectedStudents.push(action.payload)
-        },
-        clearStudents: (state, action) => {
-            state.connectedStudents = [];
+        setCurrQuizRoom: (state, action) => {
+           state.currQuizRoom = action.payload
         },
         setClientID: (state, action) => {
             state.clientID = action.payload;
@@ -82,9 +79,8 @@ export const {
     setAlert,
     setCurrQuiz,
     setStudent,
-    addStudent,
-    clearStudents,
     setClientID,
+    setCurrQuizRoom,
 
 } = mySlice.actions;
 export default mySlice.reducer;

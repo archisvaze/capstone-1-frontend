@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { setLogout, addStudent } from '../../slices/mySlice';
+import { setLogout, setCurrQuizRoom } from '../../slices/mySlice';
 import socket from "../../socketConfig";
 import "../../styles/room.css"
 
@@ -40,34 +40,23 @@ export default function TeacherRoom() {
 
             })
     }
-    console.log(state.connectedStudents)
     //socket connections
     useEffect(() => {
-        socket.on("join-request", data => {
-            console.log("join request recieved")
-            if (state.connectedStudents.includes(data.name)) {
-                console.log("name already includes : denied")
-                socket.emit("join-denied", data)
-            }
-            else {
-                console.log(state.connectedStudents)
-                console.log("name not found : granted")
-                socket.emit("join-granted", data)
-            }
-        })
-        socket.on("student-connected", data => {
-            console.log("Adding Student: " + data.name)
-            dispatch(addStudent(data.name))
+        socket.on("student-connected", room => {
+            console.log("New Student was added");
+            console.log(room)
+            dispatch(setCurrQuizRoom(room))
             return;
         })
-
     }, [])
     return (
         <div className='teachers-room'>
             <h1>TeachersRoom</h1>
+            <button className="start-quiz-btn">Start Quiz</button>
             <div className="connected-students">
                 <h3>Connected Students</h3>
-                {state?.connectedStudents?.map(student => {
+                {state.currQuizRoom.students.map(student => {
+                    console.log(state.currQuizRoom)
                     return (
                         <p key={student}>{student}</p>
                     )
