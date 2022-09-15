@@ -65,7 +65,7 @@ const mySlice = createSlice({
         },
         setClientID: (state, action) => {
             state.clientID = action.payload;
-        }
+        },
     }
 })
 

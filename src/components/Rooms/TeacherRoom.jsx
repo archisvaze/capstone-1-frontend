@@ -17,7 +17,6 @@ export default function TeacherRoom() {
     const [quiz, setQuiz] = useState({ questions: [], choices: [] })
     const [start, setStart] = useState(false)
     const [index, setIndex] = useState(0);
-    const [report, setReport] = useState([])
     const [quizStatus, setQuizStatus] = useState("not-started")
 
     useEffect(() => {
@@ -54,38 +53,46 @@ export default function TeacherRoom() {
     }
 
     function nextQuestion() {
-        console.log("next question")
-        socket.emit("next-question", { quizID: quiz._id, index: index + 1 })
-        let nextIndex = index + 1;
-        setIndex(nextIndex);
+
+        //if quiz is out of quiestions
+        if (index >= quiz.questions.length - 1) {
+            console.log("quiz over")
+            setQuizStatus("ended");
+            socket.emit("quiz-over", { quizID: quiz._id })
+
+
+        } else {
+            console.log("next question")
+            socket.emit("next-question", { quizID: quiz._id, index: index + 1 })
+            let nextIndex = index + 1;
+            setIndex(nextIndex);
+        }
+
     }
 
     function endQuiz() {
         setQuizStatus("ended");
-
+        socket.emit("quiz-over", { quizID: quiz._id })
     }
 
     //socket connections
     useEffect(() => {
         socket.on("student-connected", room => {
-            console.log("New Student was added");
-            console.log(room)
+            // console.log("New Student was added");
             dispatch(setCurrQuizRoom(room))
             return;
         })
 
         //quiz logic
         socket.on("student-answered", data => {
-            let updatedReport = JSON.parse(JSON.stringify(report))
-            if (updatedReport[data.answer.student]) {
-                updatedReport[data.answer.student].push({ question: data.answer.question, answer: data.answer.answer })
-            }
-            else {
-                updatedReport[data.answer.student] = [{ question: data.answer.question, answer: data.answer.answer }]
-            }
-            setReport(updatedReport)
             console.log(`${data.answer.student} answered: ${data.answer.answer}`)
             console.log("answer added to report")
+        })
+
+        socket.on("report", room => {
+            console.log(room)
+            dispatch(setCurrQuizRoom(room))
+            return;
         })
 
     }, [])
@@ -112,7 +119,6 @@ export default function TeacherRoom() {
             <div className="connected-students">
                 <h3>Connected Students</h3>
                 {state.currQuizRoom.students.map(student => {
-                    console.log(state.currQuizRoom)
                     return (
                         <p key={student}>{student}</p>
                     )
@@ -120,7 +126,7 @@ export default function TeacherRoom() {
             </div>
 
 
-            <div style={{ display: start === true ? "flex" : "none" }} className="teacher-quiz">
+            <div style={{ display: quizStatus === "started" ? "flex" : "none" }} className="teacher-quiz">
                 <h2>{quiz?.questions[index]?.question}</h2>
                 <button onClick={() => {
                     {
@@ -128,8 +134,29 @@ export default function TeacherRoom() {
                     }
                 }}>Next</button>
 
-
             </div>
+
+            <div style={{ display: quizStatus === "ended" ? "flex" : "none" }} className="report">
+                <h3>Report</h3>
+                {state.currQuizRoom?.report.map(student_report => {
+                    return(
+                        <div key={student_report.student} className="student-report">
+                            <p>Student: {student_report.student}</p>
+                            {student_report.answers.map(obj => {
+                                return (
+                                    <div key={obj.question} className="student-answers">
+                                        <p>q: {obj.question}</p>
+                                        <p>a: {obj.answer}</p>
+                                    </div>
+                                )
+                            })}
+
+                        </div>
+                    )
+                })}
+            </div>
+
+
         </div>
     )
 }

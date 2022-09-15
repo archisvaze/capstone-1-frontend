@@ -28,7 +28,7 @@ export default function QuizCard(props) {
 
     //socket Connection
     function createRoom() {
-        dispatch(setCurrQuizRoom({students: []}))
+        dispatch(setCurrQuizRoom({ students: [], report: [] }))
         console.log("destroying previous room")
         socket.emit("destroy-room", { quiz: obj, clientID: state.clientID });
         socket.emit("create-room", { quiz: obj, clientID: state.clientID })
