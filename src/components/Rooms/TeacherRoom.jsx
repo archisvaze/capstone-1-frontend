@@ -14,8 +14,9 @@ export default function TeacherRoom() {
 
 
     //varaibles
-    const [quiz, setQuiz] = useState({})
+    const [quiz, setQuiz] = useState({ questions: [], choices: [] })
     const [start, setStart] = useState(false)
+    const [index, setIndex] = useState(0)
 
     useEffect(() => {
         getQuizData();
@@ -40,6 +41,23 @@ export default function TeacherRoom() {
 
             })
     }
+
+
+    function startQuiz() {
+        console.log("starting quiz...")
+        socket.emit("start-quiz", { quizID: quiz._id });
+        setStart(true)
+        setIndex(0)
+    }
+
+    function nextQuestion() {
+        console.log("next question")
+        socket.emit("next-question", { quizID: quiz._id, index: index + 1 })
+        let nextIndex = index + 1;
+        setIndex(nextIndex);
+    }
+
+
     //socket connections
     useEffect(() => {
         socket.on("student-connected", room => {
@@ -52,7 +70,13 @@ export default function TeacherRoom() {
     return (
         <div className='teachers-room'>
             <h1>TeachersRoom</h1>
-            <button className="start-quiz-btn">Start Quiz</button>
+
+            <button onClick={() => {
+                {
+                    startQuiz();
+                }
+            }} className="start-quiz-btn">Start Quiz</button>
+
             <div className="connected-students">
                 <h3>Connected Students</h3>
                 {state.currQuizRoom.students.map(student => {
@@ -61,6 +85,14 @@ export default function TeacherRoom() {
                         <p key={student}>{student}</p>
                     )
                 })}
+            </div>
+
+
+            <div style={{ display: start === true ? "flex" : "none" }} className="teacher-quiz">
+                <h2>{quiz?.questions[index]?.question}</h2>
+                <button onClick={() => {{
+                    nextQuestion();
+                }}}>Next</button>
             </div>
         </div>
     )

@@ -12,8 +12,8 @@ startState = {
     newQuizDialog: false,
     alert: ["", false, "error"],
     currQuiz: { name: "", questions: [], teacher: "", _id: "" },
-    student: "",
-    currQuizRoom: {},
+    student: null,
+    currQuizRoom: { students: [] },
     clientID: "",
 };
 if (localStorage.getItem("teacher-data")) {
@@ -61,7 +61,7 @@ const mySlice = createSlice({
             state.student = action.payload;
         },
         setCurrQuizRoom: (state, action) => {
-           state.currQuizRoom = action.payload
+            state.currQuizRoom = action.payload
         },
         setClientID: (state, action) => {
             state.clientID = action.payload;

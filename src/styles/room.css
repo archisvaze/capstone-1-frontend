@@ -9,3 +9,9 @@
     max-width: 1440px;
     align-items: center;
 }
+
+.student-quiz,
+.teacher-quiz {
+    display: flex;
+    flex-direction: column;
+}
