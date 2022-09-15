@@ -44,7 +44,7 @@ export default function Room() {
       })
   }
 
-  //quiz realted socket data
+  //quiz related socket data
   useEffect(() => {
     socket.on("quiz-started", data => {
       console.log("quiz is starting")

@@ -50,7 +50,7 @@ export default function QuizCard(props) {
                 <p>Number of Questions: {obj.questions.length}</p>
             </div>
 
-            <button onClick={() => {
+            <button style={{background: "mediumseagreen"}} onClick={() => {
                 {
                     createRoom();
                 }
@@ -58,7 +58,7 @@ export default function QuizCard(props) {
 
             <div className="quiz-actions">
                 <Link to={`/${obj._id}`}>
-                    <button className="edit quiz-btn">Add/Remove Questions</button>
+                    <button className="edit quiz-btn">Edit</button>
                 </Link>
 
                 <button onClick={() => {

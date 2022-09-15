@@ -104,7 +104,7 @@ export default function EditQuiz() {
                         <div className="choices">
                             {question.choices.map(choice => {
                                 return (
-                                    <p style={{ border: question.solution === choice ? "2px solid yellowgreen" : "2px solid transparent" }} key={choice} className="choice">{choice}</p>
+                                    <p style={{ border: question.solution === choice ? "2px solid yellowgreen" : "2px solid transparent" }} key={choice} className="question-choice">{choice}</p>
                                 )
                             })}
                         </div>
@@ -113,29 +113,39 @@ export default function EditQuiz() {
                 )
             })}
 
-            <input onChange={(e) => { setNewQuestion(e.target.value) }} type="text" placeholder='Question' value={newQuestion} />
+            <input onChange={(e) => { setNewQuestion(e.target.value) }} type="text" placeholder='What is the Question?' value={newQuestion} />
 
-            <input style={{ border: solution === choice1 ? "2px solid yellowgreen" : "2px solid transparent" }} onChange={(e) => { setChoice1(e.target.value) }} type="text" placeholder='Choice1' value={choice1} />
-            <button onClick={() => {
-                if (choice1.length > 0) setSolution(choice1)
-            }} className="solution">✔️</button>
+            <div className="choice">
+                <input style={{ border: solution === choice1 ? "2px solid yellowgreen" : "2px solid transparent" }} onChange={(e) => { setChoice1(e.target.value) }} type="text" placeholder='Choice1' value={choice1} />
+                <button onClick={() => {
+                    if (choice1.length > 0) setSolution(choice1)
+                }} className="solution">✔️</button>
+            </div>
 
-            <input style={{ border: solution === choice2 ? "2px solid yellowgreen" : "2px solid transparent" }} onChange={(e) => { setChoice2(e.target.value) }} type="text" placeholder='Choice2' value={choice2} />
-            <button onClick={() => {
-                if (choice2.length > 0) setSolution(choice2)
-            }} className="solution">✔️</button>
 
-            <input style={{ border: solution === choice3 ? "2px solid yellowgreen" : "2px solid transparent" }} onChange={(e) => { setChoice3(e.target.value) }} type="text" placeholder='Choice3' value={choice3} />
-            <button onClick={() => {
-                if (choice3.length > 0) setSolution(choice3)
-            }} className="solution">✔️</button>
+            <div className="choice">
+                <input style={{ border: solution === choice2 ? "2px solid yellowgreen" : "2px solid transparent" }} onChange={(e) => { setChoice2(e.target.value) }} type="text" placeholder='Choice2' value={choice2} />
+                <button onClick={() => {
+                    if (choice2.length > 0) setSolution(choice2)
+                }} className="solution">✔️</button>
+            </div>
 
-            <input style={{ border: solution === choice4 ? "2px solid yellowgreen" : "2px solid transparent" }} onChange={(e) => { setChoice4(e.target.value) }} type="text" placeholder='Choice4' value={choice4} />
-            <button onClick={() => {
-                if (choice4.length > 0) setSolution(choice4)
-            }} className="solution">✔️</button>
+            <div className="choice">
+                <input style={{ border: solution === choice3 ? "2px solid yellowgreen" : "2px solid transparent" }} onChange={(e) => { setChoice3(e.target.value) }} type="text" placeholder='Choice3' value={choice3} />
+                <button onClick={() => {
+                    if (choice3.length > 0) setSolution(choice3)
+                }} className="solution">✔️</button>
+            </div>
 
-            <button onClick={() => { addQuestion() }}>Add new Question</button>
+            <div className="choice">
+                <input style={{ border: solution === choice4 ? "2px solid yellowgreen" : "2px solid transparent" }} onChange={(e) => { setChoice4(e.target.value) }} type="text" placeholder='Choice4' value={choice4} />
+                <button onClick={() => {
+                    if (choice4.length > 0) setSolution(choice4)
+                }} className="solution">✔️</button>
+            </div>
+            <button
+            style={{height: "50px", background : "#f1b238", fontSize: "16px"}}
+             onClick={() => { addQuestion() }}>Add Question</button>
         </div>
     )
 }

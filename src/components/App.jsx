@@ -26,11 +26,11 @@ export default function App() {
             <Header />
             <Routes>
                 <Route path="/login" element={<Login />} />
-                <Route path="/" element={<Home />} />
+                <Route path="/home" element={<Home />} />
                 <Route path="/:id" element={<EditQuiz />} />
                 <Route path="/room/:quizID" element={<StudentRoom />} />
                 <Route path="/teachers_room/:quizID" element={<TeacherRoom />} />
-                <Route path="/room/" element={<StudentHome />} />
+                <Route path="/" element={<StudentHome />} />
             </Routes>
         </BrowserRouter>
 

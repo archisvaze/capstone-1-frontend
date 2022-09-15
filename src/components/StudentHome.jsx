@@ -58,11 +58,18 @@ export default function StudentHome() {
 
       <input onChange={(e) => setName(e.target.value)} type="text" placeholder='Enter Your Name' value={name} />
       <input onChange={(e) => setQuizID(e.target.value)} type="text" placeholder='Enter Room ID' value={quizID} />
-      <button onClick={() => {
+      <button 
+      style={{backgroundColor: "#2dc4c0"}}
+      onClick={() => {
         {
           joinRoom();
         }
       }}>Enter</button>
+
+      <p>Are you a Teacher?</p>
+      <button onClick={() => {
+        navigate("/login")
+      }}>Login</button>
 
     </div>
   )

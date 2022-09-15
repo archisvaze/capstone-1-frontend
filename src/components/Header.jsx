@@ -10,26 +10,32 @@ export default function Header() {
     const navigate = useNavigate();
     return (
         <header>
-            <div className="header-container">
-                <div style={{ top: state.alert[1] === true ? "90px" : "-10vh", backgroundColor: state.alert[2] === "error" ? "red" : "blue" }} className="alert">{state.alert[0]}</div>
-                <div className="header-logo">QUIZAPP</div>
+            <div
+                style={{ justifyContent: state.isLoggedIn === true ? "space-between" : "center" }}
+                className="header-container">
+                <div style={{ top: state.alert[1] === true ? "90px" : "-20vh", backgroundColor: state.alert[2] === "error" ? "tomato" : "mediumseagreen" }} className="alert">{state.alert[0]}</div>
+                <h1 style={{ textAlign: "center" }} className="header-logo">QUIZACE</h1>
                 <nav style={{ display: state.isLoggedIn === true ? "flex" : "none" }}>
-                    <button onClick={() => {
-                        dispatch(setTab("My Quizes"))
-                        navigate("/")
-                    }}>My Quizes</button>
+                    <button
+                        style={{ background: "mediumseagreen", fontSize: "12px" }}
+                        onClick={() => {
+                            dispatch(setTab("My Quizes"))
+                            navigate("/home")
+                        }}>My Quizes</button>
 
-                    <button onClick={() => {
-                        dispatch(setTab("My Reports"))
-                        navigate("/")
-                    }}>My Reports</button>
+                    <button
+                        style={{ background: "tomato", fontSize: "12px" }}
+                        onClick={() => {
+                            dispatch(setTab("My Reports"))
+                            navigate("/home")
+                        }}>My Reports</button>
                 </nav>
                 <button
                     onClick={() => {
                         dispatch(setLogout())
                         navigate("/login")
                     }}
-                    style={{ display: state.isLoggedIn === true ? "flex" : "none" }} className="logout-btn">Logout</button>
+                    style={{ display: state.isLoggedIn === true ? "flex" : "none", fontSize: "12px", background: "crimson" }} className="logout-btn">Logout</button>
             </div>
         </header >
     )

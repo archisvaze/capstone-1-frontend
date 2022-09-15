@@ -34,7 +34,7 @@ export default function Login() {
             dispatch(setAlert(["Loged In!", false, "alert"]))
           }, 2000)
           dispatch(setLogin(data))
-          navigate('/')
+          navigate('/home')
         }
       })
 
@@ -77,6 +77,7 @@ export default function Login() {
               placeholder="Enter email"
               name="email" />
             <ErrorMessage
+             style={{ color: "orangered" }}
               name="email"
               component="div" />
 
@@ -86,10 +87,12 @@ export default function Login() {
               name="password"
               type="password" />
             <ErrorMessage
+              style={{ color: "orangered" }}
               name="password"
               component="div" />
 
             <button
+              style={{ backgroundColor: "mediumseagreen" }}
               id="submit-btn"
               type='submit'
               disabled={isSubmitting}

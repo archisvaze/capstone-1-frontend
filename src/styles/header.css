@@ -1,14 +1,12 @@
 header {
     position: fixed;
-    height: 50px;
+    height: 100px;
     top: 0;
     left: 0;
     right: 0;
-    border: 2px solid black;
     display: flex;
     justify-content: center;
     align-items: center;
-
 }
 
 .header-container {
@@ -16,18 +14,35 @@ header {
     max-width: 1440px;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    padding: 0 10px;
 }
 
 .alert {
     position: fixed;
     height: 60px;
     width: 300px;
-    background-color: blue;
     color: white;
     left: 0;
     right: 0;
     margin: auto;
     transition: 0.5s;
     z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 4px 10px 15px 4px rgba(0, 0, 0, 0.3);
+}
+
+nav{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+header h1 {
+    font-size: 40px;
+    font-family: 'VT323', monospace;
+    letter-spacing: 1px;
 }

@@ -17,6 +17,7 @@ export default function TeacherRoom() {
     const [quiz, setQuiz] = useState({ questions: [], choices: [] })
     const [index, setIndex] = useState(0);
     const [quizStatus, setQuizStatus] = useState("not-started")
+    const [report, setReport] = useState({})
 
     useEffect(() => {
         getQuizData();
@@ -88,12 +89,30 @@ export default function TeacherRoom() {
         })
 
         socket.on("report", room => {
-            console.log(room)
             dispatch(setCurrQuizRoom(room))
             return;
         })
 
     }, [])
+
+
+      //calculate scores
+  useEffect(() => {
+    let studentsReport = {};
+    if (state.currQuizRoom.report) {
+      for (let student_report of state.currQuizRoom?.report) {
+        studentsReport[student_report.student] = 0;
+        for (let answer of student_report.answers) {
+          if (answer.point === 1) {
+            studentsReport[student_report.student] += 1;
+          }
+        }
+      }
+      console.log(studentsReport);
+      setReport(studentsReport);
+
+    }
+  }, [state.currQuizRoom])
     return (
         <div className='teachers-room'>
             <h1>TeachersRoom</h1>
@@ -109,7 +128,7 @@ export default function TeacherRoom() {
             <button style={{ display: quizStatus === "started" ? "flex" : "none" }}
                 onClick={() => {
                     {
-
+                        endQuiz();
                     }
                 }}
             >End Quiz</button>
