@@ -17,14 +17,14 @@ export default function Header() {
                 <h1 style={{ textAlign: "center" }} className="header-logo">QUIZACE</h1>
                 <nav style={{ display: state.isLoggedIn === true ? "flex" : "none" }}>
                     <button
-                        style={{ background: "mediumseagreen", fontSize: "12px" }}
+                        style={{ color: "black", fontWeight: "bold", fontSize: "12px", transform: state.tab === "My Quizes" ? "translateY(4px)" : "translateY(0)", boxShadow: state.tab === "My Quizes" ? "0 5px #ffffff33" : "0 9px #ffffff4d" }}
                         onClick={() => {
                             dispatch(setTab("My Quizes"))
                             navigate("/home")
                         }}>My Quizes</button>
 
                     <button
-                        style={{ background: "tomato", fontSize: "12px" }}
+                        style={{ color: "black", fontWeight: "bold", fontSize: "12px", transform: state.tab === "My Reports" ? "translateY(4px)" : "translateY(0)", boxShadow: state.tab === "My Reports" ? "0 5px #ffffff33" : "0 9px #ffffff4d" }}
                         onClick={() => {
                             dispatch(setTab("My Reports"))
                             navigate("/home")

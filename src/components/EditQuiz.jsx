@@ -4,7 +4,7 @@ import { setCurrQuiz } from '../slices/mySlice';
 import { useSelector, useDispatch } from 'react-redux'
 import { setAlert } from '../slices/mySlice';
 import { useNavigate } from 'react-router-dom';
-import "../styles/myquizes.css"
+import "../styles/editquiz.css"
 
 export default function EditQuiz() {
     const state = useSelector((state) => state.myState);

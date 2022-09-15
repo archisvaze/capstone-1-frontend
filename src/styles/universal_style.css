@@ -102,18 +102,18 @@ button {
     color: white;
     border: none;
     outline: none;
-    box-shadow: 0 9px rgba(255, 255, 255, 0.3);
+    box-shadow: 0 9px #ffffff4d;
     border-radius: 10px;
 }
 
 button:hover{
     transform: translateY(-2px);
-    box-shadow: 0 11px rgba(255, 255, 255, 0.5);
+    box-shadow: 0 11px #ffffff80;
 }
 
 button:active{
     transform: translateY(4px);
-    box-shadow: 0 5px rgba(255, 255, 255, 0.2);
+    box-shadow: 0 5px #ffffff33;
 }
 
 a {
