@@ -15,7 +15,6 @@ export default function Room() {
   let { quizID } = useParams();
 
   const [quiz, setQuiz] = useState({ questions: [], choices: [] })
-  const [start, setStart] = useState(false)
   const [index, setIndex] = useState(0)
   const [answered, setAnswered] = useState(["", false])
   const [quizStatus, setQuizStatus] = useState("not-started");
@@ -50,7 +49,6 @@ export default function Room() {
     socket.on("quiz-started", data => {
       console.log("quiz is starting")
       setQuizStatus("started")
-      setStart(true);
       setIndex(0)
     })
     socket.on('question-nexted', data => {
@@ -96,7 +94,7 @@ export default function Room() {
   return (
     <div className='student-room'>
       <h1>StudentRoom</h1>
-      <h3 style={{ display: start === false ? "flex" : "none" }}>Waiting for Quiz to Start</h3>
+      <h3 style={{ display: quizStatus === "not-started" ? "flex" : "none" }}>Waiting for Quiz to Start</h3>
 
       <div style={{ display: quizStatus === "started" ? "flex" : "none" }} className="student-quiz">
         <h2>{quiz?.questions[index]?.question}</h2>

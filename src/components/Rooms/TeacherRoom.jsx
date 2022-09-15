@@ -15,7 +15,6 @@ export default function TeacherRoom() {
 
     //varaibles
     const [quiz, setQuiz] = useState({ questions: [], choices: [] })
-    const [start, setStart] = useState(false)
     const [index, setIndex] = useState(0);
     const [quizStatus, setQuizStatus] = useState("not-started")
 
@@ -48,7 +47,6 @@ export default function TeacherRoom() {
         setQuizStatus("started")
         console.log("starting quiz...")
         socket.emit("start-quiz", { quizID: quiz._id });
-        setStart(true)
         setIndex(0)
     }
 
@@ -108,7 +106,7 @@ export default function TeacherRoom() {
                 }} className="start-quiz-btn">Start Quiz</button>
 
 
-            <button style={{ display: quizStatus === "not-started" ? "none" : "flex" }}
+            <button style={{ display: quizStatus === "started" ? "flex" : "none" }}
                 onClick={() => {
                     {
 
@@ -139,7 +137,7 @@ export default function TeacherRoom() {
             <div style={{ display: quizStatus === "ended" ? "flex" : "none" }} className="report">
                 <h3>Report</h3>
                 {state.currQuizRoom?.report.map(student_report => {
-                    return(
+                    return (
                         <div key={student_report.student} className="student-report">
                             <p>Student: {student_report.student}</p>
                             {student_report.answers.map(obj => {
