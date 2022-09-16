@@ -31,11 +31,31 @@
     padding: 20px;
     max-width: 300px;
     width: 100%;
+    position: relative;
+    overflow: hidden;
 }
 
-.question button {
-    color: black;
+.remove-question-btn {
+    position: absolute;
+    box-shadow: none;
+    top: -1px;
+    right: -1px;
+    height: 20px;
+    width: 40px;
+    padding: 0 0 1px 0;
+    border-radius: 0;
+    border-bottom-left-radius: 5px;
+    background-color: orangered;
 }
+.remove-question-btn:hover{
+    transform: none;
+    box-shadow: none;
+}
+.remove-question-btn:active{
+    transform: none;
+    box-shadow: none;
+}
+
 
 .start-btn {
     font-size: 14px;

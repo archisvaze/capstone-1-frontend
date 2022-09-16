@@ -54,7 +54,6 @@ export default function TeacherRoom() {
     }
 
     function nextQuestion() {
-
         //if quiz is out of quiestions
         if (index >= quiz.questions.length - 1) {
             console.log("quiz over")
@@ -68,7 +67,6 @@ export default function TeacherRoom() {
             let nextIndex = index + 1;
             setIndex(nextIndex);
         }
-
     }
 
     function endQuiz() {

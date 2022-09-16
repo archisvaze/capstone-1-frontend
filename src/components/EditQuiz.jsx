@@ -105,14 +105,14 @@ export default function EditQuiz() {
                     return (
                         <div key={question._id} className="question">
                             <p>Q: {question.question}</p>
-                            <div className="choices">
+                            {/* <div className="choices">
                                 {question.choices.map(choice => {
                                     return (
                                         <p style={{ border: question.solution === choice ? "2px solid yellowgreen" : "2px solid transparent" }} key={choice} className="question-choice">{choice}</p>
                                     )
                                 })}
-                            </div>
-                            <button onClick={() => { removeQuestion(question._id) }}> <img src={trash} alt="" /> </button>
+                            </div> */}
+                            <button className='remove-question-btn' onClick={() => { removeQuestion(question._id) }}>X</button>
                         </div>
                     )
                 })}
