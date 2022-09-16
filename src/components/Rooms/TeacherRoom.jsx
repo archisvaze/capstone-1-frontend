@@ -111,7 +111,6 @@ export default function TeacherRoom() {
             }
             console.log(studentsReport);
             setReport(studentsReport);
-
         }
     }, [state.currQuizRoom])
     return (
@@ -126,7 +125,7 @@ export default function TeacherRoom() {
                 }} className="start-btn" >Start Quiz<img src={play} alt="" /></button>
 
 
-            <button style={{ display: quizStatus === "started" ? "flex" : "none" }}
+            <button style={{ display: quizStatus === "started" ? "flex" : "none", marginBottom: "30px", color: "red", fontWeight: "bold" }}
                 onClick={() => {
                     {
                         endQuiz();
@@ -134,7 +133,7 @@ export default function TeacherRoom() {
                 }}
             >End Quiz</button>
 
-            
+
             <h3>Connected Students</h3>
             <div className="connected-students">
 
@@ -147,12 +146,14 @@ export default function TeacherRoom() {
 
 
             <div style={{ display: quizStatus === "started" ? "flex" : "none" }} className="teacher-quiz">
-                <h2>{quiz?.questions[index]?.question}</h2>
-                <button onClick={() => {
-                    {
-                        nextQuestion();
-                    }
-                }}>Next</button>
+                <h2>Q: {quiz?.questions[index]?.question}</h2>
+                <button
+                    style={{ gap: "10px", background: "mediumseagreen", margin: "20px 0", fontWeight: "bold" }}
+                    onClick={() => {
+                        {
+                            nextQuestion();
+                        }
+                    }}>Next Question<img src={play} alt="" /></button>
 
             </div>
 
