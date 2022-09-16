@@ -26,6 +26,7 @@ export default function StudentHome() {
   const [quizID, setQuizID] = useState("");
 
   function joinRoom() {
+    dispatch(setAlert(["Connecting...", true, "error"]))
     if (name !== "" && quizID !== "") {
       socket.emit("join-room", {
         name: name,
@@ -42,11 +43,12 @@ export default function StudentHome() {
       setQuizID("")
       dispatch(setStudent(data.name))
       navigate(`/room/${data.quizID}`)
+      alert("Quiz Room Joined!", "alert")
     })
 
     socket.on("join-request-denied", data => {
       console.log("join-request-denied")
-      alert("Student with same name already in Room", "error")
+      alert("Student with same name is already in Room", "error")
     })
 
     socket.on("room-busy", data => {

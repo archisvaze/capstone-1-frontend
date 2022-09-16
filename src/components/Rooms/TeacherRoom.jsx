@@ -103,11 +103,11 @@ export default function TeacherRoom() {
 
         //quiz logic
         socket.on("student-answered", data => {
-            console.log(`${data.answer.student} answered: ${data.answer.answer}`)
+            // console.log(`${data.answer.student} answered: ${data.answer.answer}`)
             if (!state.haveAnswered.includes(data.answer.student)) {
                 dispatch(addtoHaveAnswered(data.answer.student))
             }
-            console.log("answer added to report")
+            // console.log("answer added to report")
         })
 
         socket.on("report", room => {

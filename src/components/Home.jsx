@@ -34,7 +34,7 @@ export default function Home() {
         if (data.error) { }
         else {
           if (data?.length > 0) data.reverse();
-          console.log(data)
+          // console.log(data)
           dispatch(setMyQuizes(data))
         }
       })
