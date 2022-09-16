@@ -23,7 +23,6 @@ export default function Room() {
   const [myScore, setMyScore] = useState(0)
   const [time, setTime] = useState(0)
 
- 
 
   useEffect(() => {
     if (state.student === null) {
