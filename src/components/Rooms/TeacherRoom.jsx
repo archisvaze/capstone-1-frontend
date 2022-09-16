@@ -87,7 +87,6 @@ export default function TeacherRoom() {
         //quiz logic
         socket.on("student-answered", data => {
             console.log(`${data.answer.student} answered: ${data.answer.answer}`)
-
             setHasAnswered([...hasAnswered, data.answer.student])
             console.log("answer added to report")
         })
