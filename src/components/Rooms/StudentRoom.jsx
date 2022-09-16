@@ -93,39 +93,43 @@ export default function Room() {
 
   return (
     <div className='student-room'>
-      <h1>StudentRoom</h1>
-      <h3 style={{ display: quizStatus === "not-started" ? "flex" : "none" }}>Waiting for Quiz to Start</h3>
+      <h1>{state.student}'s Room</h1>
+      <h3 style={{ display: quizStatus === "not-started" ? "flex" : "none" }}>Waiting for Quiz to Start...</h3>
 
       <div style={{ display: quizStatus === "started" ? "flex" : "none" }} className="student-quiz">
-        <h2>{quiz?.questions[index]?.question}</h2>
+        <h2>Q: {quiz?.questions[index]?.question}</h2>
 
-        <button disabled={answered[1]}
-          style={{ border: answered[0] === quiz.questions[index]?.choices[0] ? "2px solid yellowgreen" : "2px solid transparent" }}
-          onClick={() => {
-            answer(quiz.questions[index]?.choices[0])
-          }}
-        >{quiz.questions[index]?.choices[0]}</button>
+        <div className="student-quiz-actions">
+          <button disabled={answered[1]}
+            style={{ border: answered[0] === quiz.questions[index]?.choices[0] ? "4px solid yellowgreen" : "2px solid transparent" }}
+            onClick={() => {
+              answer(quiz.questions[index]?.choices[0])
+            }}
+          >{quiz.questions[index]?.choices[0]}</button>
 
-        <button disabled={answered[1]}
-          style={{ border: answered[0] === quiz.questions[index]?.choices[1] ? "2px solid yellowgreen" : "2px solid transparent" }}
-          onClick={() => {
-            answer(quiz.questions[index]?.choices[1])
-          }}
-        >{quiz.questions[index]?.choices[1]}</button>
+          <button disabled={answered[1]}
+            style={{ border: answered[0] === quiz.questions[index]?.choices[1] ? "4px solid yellowgreen" : "2px solid transparent" }}
+            onClick={() => {
+              answer(quiz.questions[index]?.choices[1])
+            }}
+          >{quiz.questions[index]?.choices[1]}</button>
 
-        <button disabled={answered[1]}
-          style={{ border: answered[0] === quiz.questions[index]?.choices[2] ? "2px solid yellowgreen" : "2px solid transparent" }}
-          onClick={() => {
-            answer(quiz.questions[index]?.choices[2])
-          }}
-        >{quiz.questions[index]?.choices[2]}</button>
+          <button disabled={answered[1]}
+            style={{ border: answered[0] === quiz.questions[index]?.choices[2] ? "4px solid yellowgreen" : "2px solid transparent" }}
+            onClick={() => {
+              answer(quiz.questions[index]?.choices[2])
+            }}
+          >{quiz.questions[index]?.choices[2]}</button>
 
-        <button disabled={answered[1]}
-          style={{ border: answered[0] === quiz.questions[index]?.choices[3] ? "2px solid yellowgreen" : "2px solid transparent" }}
-          onClick={() => {
-            answer(quiz.questions[index]?.choices[3])
-          }}
-        >{quiz.questions[index]?.choices[3]}</button>
+          <button disabled={answered[1]}
+            style={{ border: answered[0] === quiz.questions[index]?.choices[3] ? "4px solid yellowgreen" : "2px solid transparent" }}
+            onClick={() => {
+              answer(quiz.questions[index]?.choices[3])
+            }}
+          >{quiz.questions[index]?.choices[3]}</button>
+        </div>
+
+
 
       </div>
 
