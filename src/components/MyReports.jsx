@@ -1,10 +1,11 @@
 import React from 'react'
+import "../styles/myreports.css"
 
 export default function MyReports() {
     return (
         <div className='my-reports-page'>
 
-            <h1>My Reports</h1>
+            <h2>My Reports</h2>
 
             <div className="reports-container">
 

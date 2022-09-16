@@ -103,7 +103,13 @@ export default function Login() {
               Login
             </button>
 
+            <p>Don't have an account? <span onClick={() =>{
+              navigate("/signup")
+            }} style={{ color: 'orange' }}>Signup</span> instead</p>
+
           </Form>
+
+
         )}
       </Formik>
 

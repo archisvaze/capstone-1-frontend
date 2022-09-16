@@ -10,6 +10,7 @@ import StudentHome from './StudentHome';
 import socket from "../socketConfig";
 import { useDispatch } from 'react-redux';
 import { setClientID } from '../slices/mySlice';
+import Signup from './Auth/Signup';
 
 export default function App() {
     const dispatch = useDispatch();
@@ -26,6 +27,7 @@ export default function App() {
             <Header />
             <Routes>
                 <Route path="/login" element={<Login />} />
+                <Route path="/signup" element={<Signup />} />
                 <Route path="/home" element={<Home />} />
                 <Route path="/:id" element={<EditQuiz />} />
                 <Route path="/room/:quizID" element={<StudentRoom />} />

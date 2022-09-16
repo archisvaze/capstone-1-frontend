@@ -104,7 +104,7 @@ export default function EditQuiz() {
                 {state.currQuiz.questions.map(question => {
                     return (
                         <div key={question._id} className="question">
-                            <p>Question: {question.question}</p>
+                            <p>Q: {question.question}</p>
                             <div className="choices">
                                 {question.choices.map(choice => {
                                     return (
