@@ -177,7 +177,7 @@ export default function Room() {
       </div>
 
 
-      <Timer time={time} setTime={setTime} ></Timer>
+      <Timer time={time} setTime={setTime} quizStatus={quizStatus} ></Timer>
     </div>
 
   )

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { setLogout, setCurrQuizRoom, setTab } from '../../slices/mySlice';
+import { setLogout, setCurrQuizRoom, setTab, addtoHaveAnswered, clearHaveAnswered, setAlert } from '../../slices/mySlice';
 import socket from "../../socketConfig";
 import "../../styles/room.css"
 import play from "../../icons/play.svg"
@@ -14,13 +14,18 @@ export default function TeacherRoom() {
     const navigate = useNavigate();
     let { quizID } = useParams();
 
+    function alert(text, flag) {
+        dispatch(setAlert([text, true, flag]))
+        setTimeout(() => {
+            dispatch(setAlert([text, false, flag]))
+        }, 2000)
+    }
 
     //varaibles
     const [quiz, setQuiz] = useState({ questions: [], choices: [] })
     const [index, setIndex] = useState(0);
     const [quizStatus, setQuizStatus] = useState("not-started")
     const [report, setReport] = useState([])
-    const [hasAnswered, setHasAnswered] = useState([])
     const [time, setTime] = useState(0)
 
     useEffect(() => {
@@ -50,16 +55,22 @@ export default function TeacherRoom() {
 
 
     function startQuiz() {
-        setTime(100);
-        setQuizStatus("started")
-        console.log("starting quiz...")
-        socket.emit("start-quiz", { quizID: quiz._id });
-        setIndex(0)
+        if (state.currQuizRoom.students.length > 0) {
+            dispatch(clearHaveAnswered())
+            setTime(100);
+            setQuizStatus("started")
+            console.log("starting quiz...")
+            socket.emit("start-quiz", { quizID: quiz._id });
+            setIndex(0)
+        }
+        else {
+            alert("No Students have joined yet", "error")
+        }
     }
 
     function nextQuestion() {
         setTime(100);
-        setHasAnswered([])
+        dispatch(clearHaveAnswered())
         //if quiz is out of quiestions
         if (index >= quiz.questions.length - 1) {
             console.log("quiz over")
@@ -76,6 +87,7 @@ export default function TeacherRoom() {
     }
 
     function endQuiz() {
+        dispatch(clearHaveAnswered())
         setTime(0)
         setQuizStatus("ended");
         socket.emit("quiz-over", { quizID: quiz._id })
@@ -92,7 +104,9 @@ export default function TeacherRoom() {
         //quiz logic
         socket.on("student-answered", data => {
             console.log(`${data.answer.student} answered: ${data.answer.answer}`)
-            setHasAnswered([...hasAnswered, data.answer.student])
+            if (!state.haveAnswered.includes(data.answer.student)) {
+                dispatch(addtoHaveAnswered(data.answer.student))
+            }
             console.log("answer added to report")
         })
 
@@ -128,7 +142,8 @@ export default function TeacherRoom() {
         <div className='teachers-room'>
             <h1>TeachersRoom</h1>
 
-            <button style={{ display: quizStatus === "not-started" ? "flex" : "none", background: "mediumseagreen", marginBottom: "30px" }}
+            <button
+                style={{ display: quizStatus === "not-started" ? "flex" : "none", background: "mediumseagreen", marginBottom: "30px" }}
                 onClick={() => {
                     {
                         startQuiz();
@@ -150,7 +165,7 @@ export default function TeacherRoom() {
 
                 {state.currQuizRoom.students.map(student => {
                     return (
-                        <p style={{ border: hasAnswered.includes(student) ? "4px solid yellowgreen" : "4px solid transparent" }} className='connected-student' key={student}>{student}</p>
+                        <p style={{ border: state.haveAnswered.includes(student) ? "4px solid yellowgreen" : "4px solid transparent" }} className='connected-student' key={student}>{student}</p>
                     )
                 })}
             </div>
@@ -185,7 +200,7 @@ export default function TeacherRoom() {
                     })}
                 </div>
             </div>
-            <Timer time={time} setTime={setTime} ></Timer>
+            <Timer time={time} setTime={setTime} quizStatus={quizStatus} ></Timer>
         </div>
     )
 }

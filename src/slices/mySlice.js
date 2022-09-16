@@ -15,6 +15,7 @@ startState = {
     student: null,
     currQuizRoom: { students: [] },
     clientID: "",
+    haveAnswered: [],
 };
 if (localStorage.getItem("teacher-data")) {
     startState.teacher = JSON.parse(localStorage.getItem("teacher-data"));
@@ -66,6 +67,14 @@ const mySlice = createSlice({
         setClientID: (state, action) => {
             state.clientID = action.payload;
         },
+        addtoHaveAnswered: (state, action) => {
+            let newAnswered = [...state.haveAnswered];
+            newAnswered.push(action.payload);
+            state.haveAnswered = newAnswered
+        },
+        clearHaveAnswered: (state, action) => {
+            state.haveAnswered = [];
+        }
     }
 })
 
@@ -81,6 +90,9 @@ export const {
     setStudent,
     setClientID,
     setCurrQuizRoom,
+    addtoHaveAnswered,
+    clearHaveAnswered,
+
 
 } = mySlice.actions;
 export default mySlice.reducer;

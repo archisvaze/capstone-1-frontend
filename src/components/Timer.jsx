@@ -5,6 +5,7 @@ export default function Timer(props) {
     let setTime = props.setTime;
     let percent = time + "vw";
     let color = ""
+    let quizStatus = props.quizStatus;
 
     useEffect(() => {
         // console.log(time)
@@ -28,7 +29,7 @@ export default function Timer(props) {
 
 
     return (
-        <div className='timer'>
+        <div style={{display: quizStatus === "started" ? "flex": "none"}} className='timer'>
             <div className="timer-bar" style={{ width: percent, background: color }}></div>
 
         </div>
