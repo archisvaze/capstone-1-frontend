@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import socket from '../../socketConfig';
 import { setCurrQuizRoom } from '../../slices/mySlice';
+import Timer from '../Timer';
 
 
 
@@ -20,6 +21,7 @@ export default function Room() {
   const [quizStatus, setQuizStatus] = useState("not-started");
   const [report, setReport] = useState([])
   const [myScore, setMyScore] = useState(0)
+  const [time, setTime] = useState(0)
 
 
 
@@ -51,13 +53,16 @@ export default function Room() {
       console.log("quiz is starting")
       setQuizStatus("started")
       setIndex(0)
+      setTime(100);
     })
     socket.on('question-nexted', data => {
       setAnswered(["", false])
       console.log("next question coming up")
       setIndex(data.index)
+      setTime(100);
     })
     socket.on("report", room => {
+      setTime(0);
       setQuizStatus("ended")
       dispatch(setCurrQuizRoom(room));
 
@@ -112,28 +117,28 @@ export default function Room() {
         <h2>Q: {quiz?.questions[index]?.question}</h2>
 
         <div className="student-quiz-actions">
-          <button disabled={answered[1]}
+          <button disabled={time <= 0 ? true : (answered[1] === true ? true : false)}
             style={{ border: (answered[0] === quiz.questions[index]?.choices[0] && quiz.questions[index]?.choices[0] === quiz.questions[index]?.solution) ? "4px solid yellowgreen" : answered[0] === quiz.questions[index]?.choices[0] ? "4px solid crimson" : "4px solid transparent" }}
             onClick={() => {
               answer(quiz.questions[index]?.choices[0])
             }}
           >{quiz.questions[index]?.choices[0]}</button>
 
-          <button disabled={answered[1]}
+          <button disabled={time <= 0 ? true : (answered[1] === true ? true : false)}
             style={{ border: (answered[0] === quiz.questions[index]?.choices[1] && quiz.questions[index]?.choices[1] === quiz.questions[index]?.solution) ? "4px solid yellowgreen" : answered[0] === quiz.questions[index]?.choices[1] ? "4px solid crimson" : "4px solid transparent" }}
             onClick={() => {
               answer(quiz.questions[index]?.choices[1])
             }}
           >{quiz.questions[index]?.choices[1]}</button>
 
-          <button disabled={answered[1]}
+          <button disabled={time <= 0 ? true : (answered[1] === true ? true : false)}
             style={{ border: (answered[0] === quiz.questions[index]?.choices[2] && quiz.questions[index]?.choices[2] === quiz.questions[index]?.solution) ? "4px solid yellowgreen" : answered[0] === quiz.questions[index]?.choices[2] ? "4px solid crimson" : "4px solid transparent", display: quiz.questions[index]?.choices[2] === undefined ? "none" : "flex" }}
             onClick={() => {
               answer(quiz.questions[index]?.choices[2])
             }}
           >{quiz.questions[index]?.choices[2]}</button>
 
-          <button disabled={answered[1]}
+          <button disabled={time <= 0 ? true : (answered[1] === true ? true : false)}
             style={{ border: (answered[0] === quiz.questions[index]?.choices[3] && quiz.questions[index]?.choices[3] === quiz.questions[index]?.solution) ? "4px solid yellowgreen" : answered[0] === quiz.questions[index]?.choices[3] ? "4px solid crimson" : "4px solid transparent", display: quiz.questions[index]?.choices[3] === undefined ? "none" : "flex" }}
             onClick={() => {
               answer(quiz.questions[index]?.choices[3])
@@ -172,7 +177,7 @@ export default function Room() {
       </div>
 
 
-
+      <Timer time={time} setTime={setTime} ></Timer>
     </div>
 
   )

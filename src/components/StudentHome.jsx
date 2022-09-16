@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from "react-router-dom";
 import socket from '../socketConfig';
-import { setStudent, setAlert } from '../slices/mySlice';
+import { setStudent, setAlert, setLogout } from '../slices/mySlice';
 import "../styles/studenthome.css"
 
 
@@ -17,6 +17,10 @@ export default function StudentHome() {
       dispatch(setAlert([text, false, flag]))
     }, 2000)
   }
+
+  useEffect(() => {
+    dispatch(setLogout());
+  }, [])
 
   const [name, setName] = useState("");
   const [quizID, setQuizID] = useState("");

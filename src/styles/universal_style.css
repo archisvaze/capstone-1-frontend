@@ -140,14 +140,28 @@ input {
     gap: 20px;
     box-shadow: 5px 10px 15px 4px rgba(0, 0, 0, 0.3);
 }
-.new-quiz-actions{
+
+.new-quiz-actions {
     width: 100%;
     display: flex;
     flex-direction: row-reverse;
     justify-content: space-between;
 }
+
 .new-quiz-dialog input {
     width: 100%;
+}
+
+.timer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border: 2px solid white;
+}
+
+.timer-bar{
+    height: 20px;
 }
 
 

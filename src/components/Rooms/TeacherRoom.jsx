@@ -6,6 +6,7 @@ import { setLogout, setCurrQuizRoom, setTab } from '../../slices/mySlice';
 import socket from "../../socketConfig";
 import "../../styles/room.css"
 import play from "../../icons/play.svg"
+import Timer from '../Timer';
 
 export default function TeacherRoom() {
     const state = useSelector((state) => state.myState);
@@ -20,6 +21,7 @@ export default function TeacherRoom() {
     const [quizStatus, setQuizStatus] = useState("not-started")
     const [report, setReport] = useState([])
     const [hasAnswered, setHasAnswered] = useState([])
+    const [time, setTime] = useState(0)
 
     useEffect(() => {
         dispatch(setTab(""))
@@ -48,6 +50,7 @@ export default function TeacherRoom() {
 
 
     function startQuiz() {
+        setTime(100);
         setQuizStatus("started")
         console.log("starting quiz...")
         socket.emit("start-quiz", { quizID: quiz._id });
@@ -55,6 +58,7 @@ export default function TeacherRoom() {
     }
 
     function nextQuestion() {
+        setTime(100);
         setHasAnswered([])
         //if quiz is out of quiestions
         if (index >= quiz.questions.length - 1) {
@@ -72,6 +76,7 @@ export default function TeacherRoom() {
     }
 
     function endQuiz() {
+        setTime(0)
         setQuizStatus("ended");
         socket.emit("quiz-over", { quizID: quiz._id })
     }
@@ -111,11 +116,11 @@ export default function TeacherRoom() {
                     }
                 }
             }
-            console.log(studentsReport);
+            // console.log(studentsReport);
 
             let entries = Object.entries(studentsReport);
             entries.sort((a, b) => - a[1] + b[1])
-            console.log(entries)
+            // console.log(entries)
             setReport(entries);
         }
     }, [state.currQuizRoom])
@@ -154,7 +159,8 @@ export default function TeacherRoom() {
             <div style={{ display: quizStatus === "started" ? "flex" : "none" }} className="teacher-quiz">
                 <h2>Q: {quiz?.questions[index]?.question}</h2>
                 <button
-                    style={{ gap: "10px", background: "mediumseagreen", margin: "20px 0", fontWeight: "bold" }}
+                    disabled={time > 0 ? true : false}
+                    style={{ gap: "10px", background: time > 0 ? "#59656b" : "mediumseagreen", margin: "20px 0", fontWeight: "bold" }}
                     onClick={() => {
                         {
                             nextQuestion();
@@ -179,6 +185,7 @@ export default function TeacherRoom() {
                     })}
                 </div>
             </div>
+            <Timer time={time} setTime={setTime} ></Timer>
         </div>
     )
 }
