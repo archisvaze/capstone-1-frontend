@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { setLogout, setCurrQuizRoom } from '../../slices/mySlice';
+import { setLogout, setCurrQuizRoom, setTab } from '../../slices/mySlice';
 import socket from "../../socketConfig";
 import "../../styles/room.css"
 import play from "../../icons/play.svg"
@@ -21,6 +21,7 @@ export default function TeacherRoom() {
     const [report, setReport] = useState({})
 
     useEffect(() => {
+        dispatch(setTab(""))
         getQuizData();
     }, [])
 
@@ -157,27 +158,22 @@ export default function TeacherRoom() {
 
             </div>
 
-            <div style={{ display: quizStatus === "ended" ? "flex" : "none" }} className="report">
-                <h3>Report</h3>
-                {state.currQuizRoom?.report.map(student_report => {
-                    return (
-                        <div key={student_report.student} className="student-report">
-                            <p>Student: {student_report.student}</p>
-                            {student_report.answers.map(obj => {
-                                return (
-                                    <div key={obj.question} className="student-answers">
-                                        <p>q: {obj.question}</p>
-                                        <p>a: {obj.answer}</p>
-                                    </div>
-                                )
-                            })}
-
-                        </div>
-                    )
-                })}
+            <div style={{ display: quizStatus === "ended" ? "flex" : "none" }} className="teacher-report">
+                <h2>Final Scores</h2>
+                <button
+                    style={{ margin: "20px 0", color: "black", fontWeight: "bold", }}
+                >Save Report</button>
+                <div className="student-score-container">
+                    {Object.keys(report).map((student, index) => {
+                        return (
+                            <div key={student} className="student-score">
+                                <p>{student}</p>
+                                <p>{Object.values(report)[index]}/{Object.values(report).length}</p>
+                            </div>
+                        )
+                    })}
+                </div>
             </div>
-
-
         </div>
     )
 }

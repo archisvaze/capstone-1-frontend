@@ -24,21 +24,6 @@
     letter-spacing: 2px;
 }
 
-.report {
-    display: flex;
-    flex-direction: column;
-}
-
-.student-report {
-    margin: 5px;
-    border: 2px solid black;
-}
-
-.student-room-report {
-    display: flex;
-    flex-direction: column;
-}
-
 .teachers-room h1 {
     margin-bottom: 50px;
 }
@@ -120,4 +105,29 @@
     color: black;
     font-size: 20px;
     font-weight: bold;
+}
+
+
+.teacher-report {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.student-score-container {
+    margin: 10px 0;
+    width: 90%;
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    display: flex;
+    flex-direction: column;
+}
+
+.student-score {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 0;
+    background-color: #101b20;
+    padding: 10px ;
 }

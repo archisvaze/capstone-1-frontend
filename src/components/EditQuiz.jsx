@@ -6,6 +6,7 @@ import { setAlert } from '../slices/mySlice';
 import { useNavigate } from 'react-router-dom';
 import "../styles/editquiz.css"
 import trash from "../icons/trash.svg"
+import { setTab } from '../slices/mySlice';
 
 export default function EditQuiz() {
     const state = useSelector((state) => state.myState);
@@ -15,6 +16,7 @@ export default function EditQuiz() {
 
 
     useEffect(() => {
+        dispatch(setTab(""))
         fetch(`http://localhost:8000/quiz/${id}`)
             .then(res => res.json())
             .then(data => {

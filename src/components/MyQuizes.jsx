@@ -10,7 +10,7 @@ export default function MyQuizes(props) {
     return (
         <div className='my-quizes-page'>
 
-            <h1>My Quizes</h1>
+            <h2>My Quizes</h2>
 
             <div className="quizes-container">
                 {state.myQuizes.map(obj => {
