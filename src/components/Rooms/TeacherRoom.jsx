@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { setLogout, setCurrQuizRoom } from '../../slices/mySlice';
 import socket from "../../socketConfig";
 import "../../styles/room.css"
+import play from "../../icons/play.svg"
 
 export default function TeacherRoom() {
     const state = useSelector((state) => state.myState);
@@ -96,33 +97,33 @@ export default function TeacherRoom() {
     }, [])
 
 
-      //calculate scores
-  useEffect(() => {
-    let studentsReport = {};
-    if (state.currQuizRoom.report) {
-      for (let student_report of state.currQuizRoom?.report) {
-        studentsReport[student_report.student] = 0;
-        for (let answer of student_report.answers) {
-          if (answer.point === 1) {
-            studentsReport[student_report.student] += 1;
-          }
-        }
-      }
-      console.log(studentsReport);
-      setReport(studentsReport);
+    //calculate scores
+    useEffect(() => {
+        let studentsReport = {};
+        if (state.currQuizRoom.report) {
+            for (let student_report of state.currQuizRoom?.report) {
+                studentsReport[student_report.student] = 0;
+                for (let answer of student_report.answers) {
+                    if (answer.point === 1) {
+                        studentsReport[student_report.student] += 1;
+                    }
+                }
+            }
+            console.log(studentsReport);
+            setReport(studentsReport);
 
-    }
-  }, [state.currQuizRoom])
+        }
+    }, [state.currQuizRoom])
     return (
         <div className='teachers-room'>
             <h1>TeachersRoom</h1>
 
-            <button style={{ display: quizStatus === "not-started" ? "flex" : "none" }}
+            <button style={{ display: quizStatus === "not-started" ? "flex" : "none", background: "mediumseagreen", marginBottom: "30px" }}
                 onClick={() => {
                     {
                         startQuiz();
                     }
-                }} className="start-quiz-btn">Start Quiz</button>
+                }} className="start-btn" >Start Quiz<img src={play} alt="" /></button>
 
 
             <button style={{ display: quizStatus === "started" ? "flex" : "none" }}
@@ -133,11 +134,13 @@ export default function TeacherRoom() {
                 }}
             >End Quiz</button>
 
+            
+            <h3>Connected Students</h3>
             <div className="connected-students">
-                <h3>Connected Students</h3>
+
                 {state.currQuizRoom.students.map(student => {
                     return (
-                        <p key={student}>{student}</p>
+                        <p className='connected-student' key={student}>{student}</p>
                     )
                 })}
             </div>
