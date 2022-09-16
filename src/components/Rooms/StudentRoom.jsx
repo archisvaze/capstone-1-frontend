@@ -18,7 +18,8 @@ export default function Room() {
   const [index, setIndex] = useState(0)
   const [answered, setAnswered] = useState(["", false])
   const [quizStatus, setQuizStatus] = useState("not-started");
-  const [report, setReport] = useState({})
+  const [report, setReport] = useState([])
+  const [myScore, setMyScore] = useState(0)
 
 
 
@@ -86,7 +87,20 @@ export default function Room() {
         }
       }
       console.log(studentsReport);
-      setReport(studentsReport);
+
+      let entries = Object.entries(studentsReport);
+      entries.sort((a, b) => - a[1] + b[1])
+      console.log(entries)
+      setReport(entries);
+
+      if (report.length > 0) {
+        for (let arr of report) {
+          if (arr[0] === state.student) {
+            setMyScore(arr[1]);
+            break;
+          }
+        }
+      }
 
     }
   }, [state.currQuizRoom])
@@ -134,16 +148,24 @@ export default function Room() {
       </div>
 
 
-      <div style={{ display: quizStatus === "ended" ? "flex" : "none" }} className="student-room-report">
+      <div style={{ display: quizStatus === "ended" ? "flex" : "none" }} className="student-report">
 
-        <h3>Quiz Over</h3>
+        <h3>Podium</h3>
 
-        <div className="score-card">
-          {Object.keys(report).map((student, index) => {
+        <p className='your-score'>You scored {myScore}/{quiz.questions.length}</p>
+
+        <div className="student-score-bars">
+
+          {report.slice(0, 3).map((arr, index) => {
             return (
-              <div key={student} className="student-score">
-                <p>Student: {student}</p>
-                <p>Score: {Object.values(report)[index]}</p>
+              <div key={arr[0]}
+                style={{ order: index === 0 ? "2" : index === 1 ? "1" : "3" }}
+                className="bar-container">
+                <p>{arr[0]}</p>
+                <div
+                  style={{ height: `${arr[1] * 200 / quiz.questions.length}px`, background: index === 0? "#FFD700": index === 1? "#C0C0C0" : "#CD7F32" }}
+                  className="bar"></div>
+                <p>{arr[1]}/{quiz.questions.length}</p>
               </div>
             )
           })}

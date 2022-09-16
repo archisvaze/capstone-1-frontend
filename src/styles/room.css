@@ -108,7 +108,8 @@
 }
 
 
-.teacher-report {
+.teacher-report,
+.student-report {
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -129,5 +130,35 @@
     align-items: center;
     margin: 10px 0;
     background-color: #101b20;
-    padding: 10px ;
+    padding: 10px;
+}
+
+
+.student-score-bars {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.bar-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    margin: 0 10px;
+}
+
+.bar {
+    margin-top: 30px;
+    margin-bottom: 10px;
+    width: 50px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.your-score {
+    margin-top: 20px;
+    margin-bottom: 60px;
+    padding: 10px 0;
+    border-bottom: 2px solid white;
 }

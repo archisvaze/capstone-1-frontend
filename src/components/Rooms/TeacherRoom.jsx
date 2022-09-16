@@ -18,7 +18,7 @@ export default function TeacherRoom() {
     const [quiz, setQuiz] = useState({ questions: [], choices: [] })
     const [index, setIndex] = useState(0);
     const [quizStatus, setQuizStatus] = useState("not-started")
-    const [report, setReport] = useState({})
+    const [report, setReport] = useState([])
 
     useEffect(() => {
         dispatch(setTab(""))
@@ -111,7 +111,11 @@ export default function TeacherRoom() {
                 }
             }
             console.log(studentsReport);
-            setReport(studentsReport);
+
+            let entries = Object.entries(studentsReport);
+            entries.sort((a, b) => - a[1] + b[1])
+            console.log(entries)
+            setReport(entries);
         }
     }, [state.currQuizRoom])
     return (
@@ -164,11 +168,11 @@ export default function TeacherRoom() {
                     style={{ margin: "20px 0", color: "black", fontWeight: "bold", }}
                 >Save Report</button>
                 <div className="student-score-container">
-                    {Object.keys(report).map((student, index) => {
+                    {report.map((arr) => {
                         return (
-                            <div key={student} className="student-score">
-                                <p>{student}</p>
-                                <p>{Object.values(report)[index]}/{Object.values(report).length}</p>
+                            <div key={arr[0]} className="student-score">
+                                <p>{arr[0]}</p>
+                                <p>{arr[1]}/{quiz.questions.length}</p>
                             </div>
                         )
                     })}
