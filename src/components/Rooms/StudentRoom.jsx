@@ -92,15 +92,13 @@ export default function Room() {
       entries.sort((a, b) => - a[1] + b[1])
       console.log(entries)
       setReport(entries);
-
-      if (report.length > 0) {
-        for (let arr of report) {
-          if (arr[0] === state.student) {
-            setMyScore(arr[1]);
-            break;
-          }
+      for (let arr of entries) {
+        if (arr[0] === state.student) {
+          setMyScore(arr[1]);
+          break;
         }
       }
+
 
     }
   }, [state.currQuizRoom])
@@ -115,28 +113,28 @@ export default function Room() {
 
         <div className="student-quiz-actions">
           <button disabled={answered[1]}
-            style={{ border: answered[0] === quiz.questions[index]?.choices[0] ? "4px solid yellowgreen" : "2px solid transparent" }}
+            style={{ border: (answered[0] === quiz.questions[index]?.choices[0] && quiz.questions[index]?.choices[0] === quiz.questions[index]?.solution) ? "4px solid yellowgreen" : answered[0] === quiz.questions[index]?.choices[0] ? "4px solid crimson" : "4px solid transparent" }}
             onClick={() => {
               answer(quiz.questions[index]?.choices[0])
             }}
           >{quiz.questions[index]?.choices[0]}</button>
 
           <button disabled={answered[1]}
-            style={{ border: answered[0] === quiz.questions[index]?.choices[1] ? "4px solid yellowgreen" : "2px solid transparent" }}
+            style={{ border: (answered[0] === quiz.questions[index]?.choices[1] && quiz.questions[index]?.choices[1] === quiz.questions[index]?.solution) ? "4px solid yellowgreen" : answered[0] === quiz.questions[index]?.choices[1] ? "4px solid crimson" : "4px solid transparent" }}
             onClick={() => {
               answer(quiz.questions[index]?.choices[1])
             }}
           >{quiz.questions[index]?.choices[1]}</button>
 
           <button disabled={answered[1]}
-            style={{ border: answered[0] === quiz.questions[index]?.choices[2] ? "4px solid yellowgreen" : "2px solid transparent" }}
+            style={{ border: (answered[0] === quiz.questions[index]?.choices[2] && quiz.questions[index]?.choices[2] === quiz.questions[index]?.solution) ? "4px solid yellowgreen" : answered[0] === quiz.questions[index]?.choices[2] ? "4px solid crimson" : "4px solid transparent", display: quiz.questions[index]?.choices[2] === undefined ? "none" : "flex" }}
             onClick={() => {
               answer(quiz.questions[index]?.choices[2])
             }}
           >{quiz.questions[index]?.choices[2]}</button>
 
           <button disabled={answered[1]}
-            style={{ border: answered[0] === quiz.questions[index]?.choices[3] ? "4px solid yellowgreen" : "2px solid transparent" }}
+            style={{ border: (answered[0] === quiz.questions[index]?.choices[3] && quiz.questions[index]?.choices[3] === quiz.questions[index]?.solution) ? "4px solid yellowgreen" : answered[0] === quiz.questions[index]?.choices[3] ? "4px solid crimson" : "4px solid transparent", display: quiz.questions[index]?.choices[3] === undefined ? "none" : "flex" }}
             onClick={() => {
               answer(quiz.questions[index]?.choices[3])
             }}
@@ -163,7 +161,7 @@ export default function Room() {
                 className="bar-container">
                 <p>{arr[0]}</p>
                 <div
-                  style={{ height: `${arr[1] * 200 / quiz.questions.length}px`, background: index === 0? "#FFD700": index === 1? "#C0C0C0" : "#CD7F32" }}
+                  style={{ height: `${arr[1] * 200 / quiz.questions.length}px`, background: index === 0 ? "#FFD700" : index === 1 ? "#C0C0C0" : "#CD7F32" }}
                   className="bar"></div>
                 <p>{arr[1]}/{quiz.questions.length}</p>
               </div>
