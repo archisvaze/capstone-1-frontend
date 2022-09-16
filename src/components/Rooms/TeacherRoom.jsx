@@ -19,6 +19,7 @@ export default function TeacherRoom() {
     const [index, setIndex] = useState(0);
     const [quizStatus, setQuizStatus] = useState("not-started")
     const [report, setReport] = useState([])
+    const [hasAnswered, setHasAnswered] = useState([])
 
     useEffect(() => {
         dispatch(setTab(""))
@@ -54,6 +55,7 @@ export default function TeacherRoom() {
     }
 
     function nextQuestion() {
+        setHasAnswered([])
         //if quiz is out of quiestions
         if (index >= quiz.questions.length - 1) {
             console.log("quiz over")
@@ -85,6 +87,8 @@ export default function TeacherRoom() {
         //quiz logic
         socket.on("student-answered", data => {
             console.log(`${data.answer.student} answered: ${data.answer.answer}`)
+
+            setHasAnswered([...hasAnswered, data.answer.student])
             console.log("answer added to report")
         })
 
@@ -142,7 +146,7 @@ export default function TeacherRoom() {
 
                 {state.currQuizRoom.students.map(student => {
                     return (
-                        <p className='connected-student' key={student}>{student}</p>
+                        <p style={{ border: hasAnswered.includes(student) ? "4px solid yellowgreen" : "4px solid transparent" }} className='connected-student' key={student}>{student}</p>
                     )
                 })}
             </div>
