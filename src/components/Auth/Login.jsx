@@ -5,14 +5,17 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { setLogin, setAlert } from '../../slices/mySlice';
 
-
-
-
-
 export default function Login() {
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  function alert(text, flag) {
+    dispatch(setAlert([text, true, flag]))
+    setTimeout(() => {
+      dispatch(setAlert([text, false, flag]))
+    }, 2000)
+  }
 
   const login = (values) => {
     dispatch(setAlert(["Loging In...", true, "alert"]))
@@ -27,11 +30,11 @@ export default function Login() {
       .then(res => res.json())
       .then(data => {
         if (data.error) {
-          console.log(data.error)
+          alert(data.error, "error")
         } else {
-          dispatch(setAlert(["Loged In!", true, "alert"]))
+          dispatch(setAlert(["Logged In!", true, "alert"]))
           setTimeout(() => {
-            dispatch(setAlert(["Loged In!", false, "alert"]))
+            dispatch(setAlert(["Logged In!", false, "alert"]))
           }, 2000)
           dispatch(setLogin(data))
           navigate('/home')
@@ -77,7 +80,7 @@ export default function Login() {
               placeholder="Enter email"
               name="email" />
             <ErrorMessage
-             style={{ color: "orangered" }}
+              style={{ color: "orangered" }}
               name="email"
               component="div" />
 

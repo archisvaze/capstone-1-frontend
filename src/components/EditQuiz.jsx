@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { setAlert } from '../slices/mySlice';
 import { useNavigate } from 'react-router-dom';
 import "../styles/editquiz.css"
+import trash from "../icons/trash.svg"
 
 export default function EditQuiz() {
     const state = useSelector((state) => state.myState);
@@ -94,58 +95,65 @@ export default function EditQuiz() {
             })
     }
 
+
     return (
         <div className='edit-quiz-page'>
-            <h3>{state.currQuiz.name}</h3>
-            {state.currQuiz.questions.map(question => {
-                return (
-                    <div key={question._id} className="question">
-                        <p>Question: {question.question}</p>
-                        <div className="choices">
-                            {question.choices.map(choice => {
-                                return (
-                                    <p style={{ border: question.solution === choice ? "2px solid yellowgreen" : "2px solid transparent" }} key={choice} className="question-choice">{choice}</p>
-                                )
-                            })}
+            <div className="questions-container">
+                {state.currQuiz.questions.map(question => {
+                    return (
+                        <div key={question._id} className="question">
+                            <p>Question: {question.question}</p>
+                            <div className="choices">
+                                {question.choices.map(choice => {
+                                    return (
+                                        <p style={{ border: question.solution === choice ? "2px solid yellowgreen" : "2px solid transparent" }} key={choice} className="question-choice">{choice}</p>
+                                    )
+                                })}
+                            </div>
+                            <button onClick={() => { removeQuestion(question._id) }}> <img src={trash} alt="" /> </button>
                         </div>
-                        <button onClick={() => { removeQuestion(question._id) }}>Remove Question</button>
-                    </div>
-                )
-            })}
-
-            <input onChange={(e) => { setNewQuestion(e.target.value) }} type="text" placeholder='What is the Question?' value={newQuestion} />
-
-            <div className="choice">
-                <input style={{ border: solution === choice1 ? "2px solid yellowgreen" : "2px solid transparent" }} onChange={(e) => { setChoice1(e.target.value) }} type="text" placeholder='Choice1' value={choice1} />
-                <button onClick={() => {
-                    if (choice1.length > 0) setSolution(choice1)
-                }} className="solution">✔️</button>
+                    )
+                })}
             </div>
 
+            <div className="new-question-container">
 
-            <div className="choice">
-                <input style={{ border: solution === choice2 ? "2px solid yellowgreen" : "2px solid transparent" }} onChange={(e) => { setChoice2(e.target.value) }} type="text" placeholder='Choice2' value={choice2} />
-                <button onClick={() => {
-                    if (choice2.length > 0) setSolution(choice2)
-                }} className="solution">✔️</button>
-            </div>
+                <h3>{state.currQuiz.name}</h3>
+                <input onChange={(e) => { setNewQuestion(e.target.value) }} className="new-question-input" type="text" placeholder='What is the Question?' value={newQuestion} />
 
-            <div className="choice">
-                <input style={{ border: solution === choice3 ? "2px solid yellowgreen" : "2px solid transparent" }} onChange={(e) => { setChoice3(e.target.value) }} type="text" placeholder='Choice3' value={choice3} />
-                <button onClick={() => {
-                    if (choice3.length > 0) setSolution(choice3)
-                }} className="solution">✔️</button>
-            </div>
+                <div className="choice">
+                    <input style={{ border: solution === choice1 ? "2px solid yellowgreen" : "2px solid transparent" }} onChange={(e) => { setChoice1(e.target.value) }} type="text" placeholder='Choice1' value={choice1} />
+                    <button onClick={() => {
+                        if (choice1.length > 0) setSolution(choice1)
+                    }} className="solution">✔️</button>
+                </div>
 
-            <div className="choice">
-                <input style={{ border: solution === choice4 ? "2px solid yellowgreen" : "2px solid transparent" }} onChange={(e) => { setChoice4(e.target.value) }} type="text" placeholder='Choice4' value={choice4} />
-                <button onClick={() => {
-                    if (choice4.length > 0) setSolution(choice4)
-                }} className="solution">✔️</button>
+
+                <div className="choice">
+                    <input style={{ border: solution === choice2 ? "2px solid yellowgreen" : "2px solid transparent" }} onChange={(e) => { setChoice2(e.target.value) }} type="text" placeholder='Choice2' value={choice2} />
+                    <button onClick={() => {
+                        if (choice2.length > 0) setSolution(choice2)
+                    }} className="solution">✔️</button>
+                </div>
+
+                <div className="choice">
+                    <input style={{ border: solution === choice3 ? "2px solid yellowgreen" : "2px solid transparent" }} onChange={(e) => { setChoice3(e.target.value) }} type="text" placeholder='Choice3' value={choice3} />
+                    <button onClick={() => {
+                        if (choice3.length > 0) setSolution(choice3)
+                    }} className="solution">✔️</button>
+                </div>
+
+                <div className="choice">
+                    <input style={{ border: solution === choice4 ? "2px solid yellowgreen" : "2px solid transparent" }} onChange={(e) => { setChoice4(e.target.value) }} type="text" placeholder='Choice4' value={choice4} />
+                    <button onClick={() => {
+                        if (choice4.length > 0) setSolution(choice4)
+                    }} className="solution">✔️</button>
+                </div>
+                <button
+                    style={{ margin: "20px", height: "40px", background: "#f1b238", fontSize: "16px" }}
+                    onClick={() => { addQuestion() }}>Add Question</button>
             </div>
-            <button
-                style={{ margin: "20px", height: "40px", background: "#f1b238", fontSize: "16px" }}
-                onClick={() => { addQuestion() }}>Add Question</button>
         </div>
+
     )
 }
