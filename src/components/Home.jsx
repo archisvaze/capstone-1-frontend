@@ -5,6 +5,7 @@ import { setLogout, setMyQuizes, setNewQuizDialog, setAlert } from '../slices/my
 import MyQuizes from './MyQuizes';
 import MyReports from './MyReports';
 import "../styles/home.css"
+import cancel from "../icons/cancel.svg"
 
 
 export default function Home() {
@@ -61,7 +62,7 @@ export default function Home() {
       })
 
   }
-  
+
   return (
     <div className='home-page'>
 
@@ -71,20 +72,25 @@ export default function Home() {
 
       <div style={{ display: state.newQuizDialog === true ? "flex" : "none" }} className="new-quiz-dialog">
 
+        <h3 style={{ textAlign: "center" }}>Create A New Quiz</h3>
+
         <input onChange={(e) => {
           e.stopPropagation();
           setquizName(e.target.value)
         }} type="text" placeholder='Enter A Title for your Quiz' value={quizName} />
 
-        <button onClick={(e) => {
-          createNewQuiz();
-          e.stopPropagation();
-        }}>Create Quiz</button>
+        <div className="new-quiz-actions">
+          <button style={{ background: "mediumseagreen", height: "40px" }} onClick={(e) => {
+            createNewQuiz();
+            e.stopPropagation();
+          }}>Create Quiz</button>
 
-        <button onClick={(e) => {
-          dispatch(setNewQuizDialog(false));
-          e.stopPropagation();
-        }}>Cancel</button>
+          <button style={{ background: "darkslategray" }}
+            onClick={(e) => {
+              dispatch(setNewQuizDialog(false));
+              e.stopPropagation();
+            }}> Cancel </button>
+        </div>
 
 
       </div>
