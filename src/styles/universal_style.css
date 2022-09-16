@@ -16,7 +16,9 @@ body {
     justify-content: center;
     background: #192a32;
     color: white;
-    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: auto;
+
 }
 
 .home-page,
