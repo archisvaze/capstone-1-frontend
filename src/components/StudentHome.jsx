@@ -36,7 +36,6 @@ export default function StudentHome() {
         name: name,
         nanoID: nanoID,
         clientID: state.clientID,
-
       })
     }
   }
