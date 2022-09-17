@@ -49,8 +49,12 @@ export default function EditQuiz() {
     }
 
     const addQuestion = async () => {
-        if (newQuestion.length === 0 || choice1.length === 0 || choice2.length === 0) {
-            alert("A Question must have atleast 2 choices!", "error")
+        if (newQuestion.length === 0 ) {
+            alert("A Quiz must have a question!", "error")
+            return;
+        }
+        if( choice1.length === 0 || choice2.length === 0){
+            alert("Choice #1 and Choice #2 cannot be empty!", "error")
             return;
         }
         if (solution === null) {
