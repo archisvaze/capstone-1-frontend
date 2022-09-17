@@ -1,7 +1,7 @@
 .teachers-room,
 .student-room,
 .student-home {
-    padding-top: 100px;
+    padding-top: 120px;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -163,15 +163,33 @@
     border-bottom: 2px solid white;
 }
 
-.nanoID{
+.nanoID {
     margin-bottom: 30px;
 }
 
-.nanoID span{
+.nanoID span {
     background-color: #101b20;
     padding: 7px;
     border: 3px solid rgba(255, 255, 255, 0.7);
     border-radius: 5px;
     cursor: pointer;
     letter-spacing: 3px;
+}
+
+.back-btn {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 10;
+    color: black;
+    font-weight: bold;
+}
+
+.teacher-back-btn {
+    position: fixed;
+    top: 120px;
+    left: 20px;
+    z-index: 10;
+    color: black;
+    font-weight: bold;
 }

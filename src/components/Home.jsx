@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom';
 import { setLogout, setMyQuizes, setNewQuizDialog, setAlert, setTab } from '../slices/mySlice';
 import MyQuizes from './MyQuizes';
 import MyReports from './MyReports';
-import "../styles/home.css"
 
 export default function Home() {
   const state = useSelector((state) => state.myState);

@@ -109,7 +109,13 @@ export default function Room() {
 
   return (
     <div className='student-room'>
+
+      <button onClick={() => {
+        window.open("http://localhost:3000", "_self")
+      }}  className="back-btn">	&#129052; Back</button>
+
       <h1>{state.student}'s Room</h1>
+
       <h3 style={{ display: quizStatus === "not-started" ? "flex" : "none" }}>Waiting for Quiz to Start...</h3>
 
       <div style={{ display: quizStatus === "started" ? "flex" : "none" }} className="student-quiz">

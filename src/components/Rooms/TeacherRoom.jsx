@@ -182,6 +182,11 @@ export default function TeacherRoom() {
         <div className='teachers-room'>
             <h1>Teachers' Room</h1>
 
+            <button onClick={() => {
+                dispatch(setTab("My Quizes"))
+                navigate("/home")
+            }} className="teacher-back-btn">&#129052; Back</button>
+
             <CopyToClipboard text={quiz?.nanoID}>
                 <h2 onClick={() => alert("RoomID Copied to Clipboard", "alert")} className='nanoID'>Room ID: <span>{quiz?.nanoID}</span></h2>
             </CopyToClipboard>

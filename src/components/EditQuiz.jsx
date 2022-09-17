@@ -102,6 +102,10 @@ export default function EditQuiz() {
 
     return (
         <div className='edit-quiz-page'>
+            <button onClick={() => {
+                dispatch(setTab("My Quizes"))
+                navigate("/home")
+            }} className="teacher-back-btn">&#129052; Back</button>
             <div className="questions-container">
                 {state.currQuiz.questions.map(question => {
                     return (
@@ -154,7 +158,7 @@ export default function EditQuiz() {
                     }} className="solution">✔️</button>
                 </div>
                 <button
-                    style={{ margin: "20px", width: "50%", height: "50px", background: "#f1b238", fontSize: "16px" }}
+                    style={{ margin: "20px", width: "50%", height: "50px", background: "#f1b238", fontSize: "16px", textShadow: "1px 1px 3px black" }}
                     onClick={() => { addQuestion() }}>Add Question</button>
             </div>
         </div>
