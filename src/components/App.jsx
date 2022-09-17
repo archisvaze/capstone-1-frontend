@@ -12,12 +12,14 @@ import { useDispatch } from 'react-redux';
 import { setClientID } from '../slices/mySlice';
 import Signup from './Auth/Signup';
 
+
 export default function App() {
     const dispatch = useDispatch();
     useEffect(() => {
         socket.on("react-connection", (data) => {
             dispatch(setClientID(data))
         })
+        // eslint-disable-next-line
     }, [])
 
     return (
