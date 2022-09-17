@@ -21,8 +21,8 @@ export default function App() {
         // eslint-disable-next-line
     }, [])
 
-    return (
 
+    return (
         <BrowserRouter>
 
             <Header />
@@ -35,8 +35,7 @@ export default function App() {
                 <Route path="/teachers_room/:quizID" element={<TeacherRoom />} />
                 <Route path="/" element={<StudentHome />} />
             </Routes>
+
         </BrowserRouter>
-
-
     )
 }
