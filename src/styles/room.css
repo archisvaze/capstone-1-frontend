@@ -162,3 +162,16 @@
     padding: 10px 0;
     border-bottom: 2px solid white;
 }
+
+.nanoID{
+    margin-bottom: 30px;
+}
+
+.nanoID span{
+    background-color: #101b20;
+    padding: 7px;
+    border: 3px solid rgba(255, 255, 255, 0.7);
+    border-radius: 5px;
+    cursor: pointer;
+    letter-spacing: 3px;
+}

@@ -7,6 +7,7 @@ import socket from "../../socketConfig";
 import "../../styles/room.css"
 import play from "../../icons/play.svg"
 import Timer from '../Timer';
+import CopyToClipboard from 'react-copy-to-clipboard';
 
 export default function TeacherRoom() {
     const state = useSelector((state) => state.myState);
@@ -65,7 +66,7 @@ export default function TeacherRoom() {
             setTime(100);
             setQuizStatus("started")
             console.log("quiz started")
-            socket.emit("start-quiz", { quizID: quiz._id, nanoID : quiz.nanoID });
+            socket.emit("start-quiz", { quizID: quiz._id, nanoID: quiz.nanoID });
             setIndex(0)
         }
         else {
@@ -94,7 +95,7 @@ export default function TeacherRoom() {
         dispatch(clearHaveAnswered())
         setTime(0)
         setQuizStatus("ended");
-        socket.emit("quiz-over", { quizID: quiz._id, nanoID : quiz.nanoID })
+        socket.emit("quiz-over", { quizID: quiz._id, nanoID: quiz.nanoID })
     }
 
     //socket connections
@@ -179,9 +180,12 @@ export default function TeacherRoom() {
 
     return (
         <div className='teachers-room'>
-            <h1>TeachersRoom</h1>
+            <h1>Teachers' Room</h1>
 
-            <h2>{quiz?.nanoID}</h2>
+            <CopyToClipboard text={quiz?.nanoID}>
+                <h2 onClick={() => alert("RoomID Copied to Clipboard", "alert")} className='nanoID'>Room ID: <span>{quiz?.nanoID}</span></h2>
+            </CopyToClipboard>
+
 
             <button
                 style={{ display: quizStatus === "not-started" ? "flex" : "none", background: "mediumseagreen", marginBottom: "30px" }}
