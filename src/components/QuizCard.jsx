@@ -16,6 +16,7 @@ export default function QuizCard(props) {
     const navigate = useNavigate();
     let obj = props.obj;
 
+    //function to show alerts
     function alert(text, flag) {
         dispatch(setAlert([text, true, flag]))
         setTimeout(() => {
@@ -37,7 +38,8 @@ export default function QuizCard(props) {
             })
     }
 
-    //socket Connection
+
+    //socket Connections
     function createRoom() {
         if (obj.questions.length === 0) {
             alert("Quiz must have atleast 1 question to start!", "error")
@@ -55,6 +57,7 @@ export default function QuizCard(props) {
             console.log("Room Created " + data.quiz._id);
             navigate(`/teachers_room/${data.quiz._id}`)
         })
+        // eslint-disable-next-line
     }, [])
 
 
@@ -67,16 +70,19 @@ export default function QuizCard(props) {
             </div>
 
             <button style={{ background: "mediumseagreen" }} onClick={() => {
-                {
-                    createRoom();
-                }
+
+                createRoom();
+
             }} className="start-btn" >Start Quiz<img src={play} alt="" /> </button>
 
             <div className="quiz-actions">
+
+                {/* Edit Quiz : ADD/REMOVE Questions */}
                 <Link to={`/${obj._id}`}>
                     <button><img src={edit} alt="" /></button>
                 </Link>
 
+                {/* DELETE QUIZ */}
                 <button onClick={() => {
                     deleteQuiz();
                 }}><img src={trash} alt="" /></button>

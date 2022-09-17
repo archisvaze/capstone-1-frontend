@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import "../styles/editquiz.css"
 import { setTab } from '../slices/mySlice';
 
+
 export default function EditQuiz() {
     const state = useSelector((state) => state.myState);
     const navigate = useNavigate();

@@ -12,7 +12,6 @@ import { useDispatch } from 'react-redux';
 import { setClientID } from '../slices/mySlice';
 import Signup from './Auth/Signup';
 
-
 export default function App() {
     const dispatch = useDispatch();
     useEffect(() => {

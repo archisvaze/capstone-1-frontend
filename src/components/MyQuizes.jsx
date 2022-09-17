@@ -21,11 +21,11 @@ export default function MyQuizes(props) {
 
             </div>
 
-            <button 
-            style={{background: "#2dc4c0", fontSize: "16px"}}
-            onClick={() => {
-                dispatch(setNewQuizDialog(true))
-            }} className="create-quiz-btn">New Quiz</button>
+            <button
+                style={{ background: "#2dc4c0", fontSize: "16px" }}
+                onClick={() => {
+                    dispatch(setNewQuizDialog(true))
+                }} className="create-quiz-btn">New Quiz</button>
         </div>
     )
 }

@@ -6,7 +6,6 @@ import MyQuizes from './MyQuizes';
 import MyReports from './MyReports';
 import "../styles/home.css"
 
-
 export default function Home() {
   const state = useSelector((state) => state.myState);
   const dispatch = useDispatch();
@@ -77,9 +76,11 @@ export default function Home() {
   return (
     <div className='home-page'>
 
+
       {state.tab === "My Quizes" ? <MyQuizes /> : <MyReports />}
 
 
+      {/* DIALOG BOX TO CREATE NEW QUIZ */}
 
       <div style={{ display: state.newQuizDialog === true ? "flex" : "none" }} className="new-quiz-dialog">
 
@@ -102,9 +103,9 @@ export default function Home() {
               e.stopPropagation();
             }}> Cancel </button>
         </div>
-
-
       </div>
+
+      {/* background filter with blur effect */}
       <div onClick={() => {
         dispatch(setNewQuizDialog(false));
         setquizName("")

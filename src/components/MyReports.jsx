@@ -9,8 +9,10 @@ export default function MyReports() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
+    //variables
     const [reports, setreports] = useState([])
 
+    // function to show alerts
     function alert(text, flag) {
         dispatch(setAlert([text, true, flag]))
         setTimeout(() => {
@@ -20,6 +22,7 @@ export default function MyReports() {
 
     useEffect(() => {
         getAllReports();
+        // eslint-disable-next-line
     }, [state.alert])
 
     const getAllReports = async () => {
@@ -30,8 +33,10 @@ export default function MyReports() {
                 if (data.error) {
                     alert(data.error, "error")
                 }
+                // eslint-disable-next-line
                 if (state.teacher._id == undefined || state.isLoggedIn === false) {
-                    //unauthorized access
+
+                    //if unauthorized access
                     dispatch(setLogout());
                     navigate("/login")
                     return;
@@ -70,6 +75,8 @@ export default function MyReports() {
                                 deleteReport(obj._id)
                             }} className="rp-delete-btn">X</button>
 
+
+                            {/* Report Card */}
                             <p className="rp-quiz-name">Quiz Name: <span>{obj.quiz.name}</span></p>
                             <p className="rp-date">Date: <span>{obj.createdAt.split("T")[0]}</span></p>
                             <p className="rp-scoreboard">Score Board</p>
@@ -83,13 +90,10 @@ export default function MyReports() {
                                     )
                                 })}
                             </div>
-
                         </div>
                     )
                 })}
-
             </div>
-
         </div>
     )
 }

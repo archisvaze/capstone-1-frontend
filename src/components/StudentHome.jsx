@@ -11,6 +11,7 @@ export default function StudentHome() {
   const dispatch = useDispatch();
   const state = useSelector(state => state.myState);
 
+  //function to show alerts
   function alert(text, flag) {
     dispatch(setAlert([text, true, flag]))
     setTimeout(() => {
@@ -20,8 +21,11 @@ export default function StudentHome() {
 
   useEffect(() => {
     dispatch(setLogout());
+    // eslint-disable-next-line
   }, [])
 
+
+  //valriables
   const [name, setName] = useState("");
   const [quizID, setQuizID] = useState("");
 
@@ -36,6 +40,7 @@ export default function StudentHome() {
     }
   }
 
+  //socket connections
   useEffect(() => {
     socket.on("join-request-granted", data => {
       console.log("join-request-granted")
@@ -55,7 +60,7 @@ export default function StudentHome() {
       console.log("Quiz in Progess on Ended")
       alert("The Quiz is already in progess or has ended", "error")
     })
-
+    // eslint-disable-next-line
   }, [])
 
 
@@ -68,9 +73,9 @@ export default function StudentHome() {
         <button
           style={{ backgroundColor: "#2dc4c0", fontSize: "16px" }}
           onClick={() => {
-            {
-              joinRoom();
-            }
+
+            joinRoom();
+
           }}>Enter</button>
       </div>
 

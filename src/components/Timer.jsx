@@ -11,8 +11,10 @@ export default function Timer(props) {
         // console.log(time)
         if (time > 0) {
             const timer = setTimeout(() => {
+                // eslint-disable-next-line
                 time -= 1;
                 setTime(time);
+                // eslint-disable-next-line
                 percent = time + "vw"
             }, 50.0)
 
@@ -20,6 +22,7 @@ export default function Timer(props) {
                 clearTimeout(timer)
             }
         }
+        // eslint-disable-next-line
     }, [time])
 
 
@@ -27,9 +30,8 @@ export default function Timer(props) {
     if (time >= 21 && time <= 50) color = "yellow";
     if (time >= 51) color = "yellowgreen"
 
-
     return (
-        <div style={{display: quizStatus === "started" ? "flex": "none"}} className='timer'>
+        <div style={{ display: quizStatus === "started" ? "flex" : "none" }} className='timer'>
             <div className="timer-bar" style={{ width: percent, background: color }}></div>
 
         </div>
