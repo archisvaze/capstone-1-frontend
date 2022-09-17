@@ -6,6 +6,7 @@
     width: 100vw;
     max-width: 1440px;
     align-items: flex-start;
+    position: relative;
 }
 
 .questions-container {

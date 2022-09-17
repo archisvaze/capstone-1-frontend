@@ -86,7 +86,7 @@ export default function TeacherRoom() {
 
         } else {
             console.log("next question")
-            socket.emit("next-question", { quizID: quiz._id, index: index + 1 })
+            socket.emit("next-question", { quizID: quiz._id, index: index + 1, nanoID: quiz.nanoID })
             let nextIndex = index + 1;
             setIndex(nextIndex);
         }
