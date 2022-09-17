@@ -47,8 +47,8 @@ export default function QuizCard(props) {
         else {
             dispatch(setCurrQuizRoom({ students: [], report: [] }))
             console.log("destroying previous room")
-            socket.emit("destroy-room", { quiz: obj, clientID: state.clientID });
-            socket.emit("create-room", { quiz: obj, clientID: state.clientID })
+            socket.emit("destroy-room", { quiz: obj, clientID: state.clientID , nanoID : obj.nanoID});
+            socket.emit("create-room", { quiz: obj, clientID: state.clientID, nanoID: obj.nanoID })
         }
     }
 
@@ -63,7 +63,6 @@ export default function QuizCard(props) {
 
     return (
         <div className='quiz-card'>
-
             <div className="quiz-info">
                 <h3 className="quiz-title">{obj.name}</h3>
                 <p>Number of Questions: {obj.questions.length}</p>

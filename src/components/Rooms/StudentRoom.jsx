@@ -77,7 +77,7 @@ export default function Room() {
       question: quiz?.questions[index]?.question,
       answer: answer
     }
-    socket.emit("student-answer", { quizID: quiz._id, answer: answerObj })
+    socket.emit("student-answer", { quizID: quiz._id, answer: answerObj, nanoID: quiz.nanoID })
   }
 
   //calculate scores

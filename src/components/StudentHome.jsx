@@ -27,15 +27,16 @@ export default function StudentHome() {
 
   //valriables
   const [name, setName] = useState("");
-  const [quizID, setQuizID] = useState("");
+  const [nanoID, setNanoID] = useState("");
 
   function joinRoom() {
     dispatch(setAlert(["Connecting...", true, "error"]))
-    if (name !== "" && quizID !== "") {
+    if (name !== "" && nanoID !== "") {
       socket.emit("join-room", {
         name: name,
-        quizID: quizID,
-        clientID: state.clientID
+        nanoID: nanoID,
+        clientID: state.clientID,
+
       })
     }
   }
@@ -45,7 +46,7 @@ export default function StudentHome() {
     socket.on("join-request-granted", data => {
       console.log("join-request-granted")
       setName("");
-      setQuizID("")
+      setNanoID("")
       dispatch(setStudent(data.name))
       navigate(`/room/${data.quizID}`)
       alert("Quiz Room Joined!", "alert")
@@ -69,7 +70,7 @@ export default function StudentHome() {
 
       <div className="main">
         <input onChange={(e) => setName(e.target.value)} type="text" placeholder='Enter Your Name' value={name} />
-        <input onChange={(e) => setQuizID(e.target.value)} type="text" placeholder='Enter Room ID' value={quizID} />
+        <input onChange={(e) => setNanoID(e.target.value)} type="text" placeholder='Enter Room ID' value={nanoID} />
         <button
           style={{ backgroundColor: "#2dc4c0", fontSize: "16px" }}
           onClick={() => {

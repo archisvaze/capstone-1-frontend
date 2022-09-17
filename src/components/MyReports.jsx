@@ -67,21 +67,21 @@ export default function MyReports() {
             <h2>My Reports</h2>
 
             <div className="rp-reports-container">
-                {reports.map(obj => {
+                {reports?.map(obj => {
                     return (
-                        <div key={obj._id} className="rp-report-container">
+                        <div key={obj?._id} className="rp-report-container">
 
                             <button onClick={() => {
-                                deleteReport(obj._id)
+                                deleteReport(obj?._id)
                             }} className="rp-delete-btn">X</button>
 
 
                             {/* Report Card */}
-                            <p className="rp-quiz-name">Quiz Name: <span>{obj.quiz.name}</span></p>
-                            <p className="rp-date">Date: <span>{obj.createdAt.split("T")[0]}</span></p>
+                            <p className="rp-quiz-name">Quiz Name: <span>{obj?.quiz?.name}</span></p>
+                            <p className="rp-date">Date: <span>{obj?.createdAt?.split("T")[0]}</span></p>
                             <p className="rp-scoreboard">Score Board</p>
                             <div className="rp-report">
-                                {obj.report.map(rp => {
+                                {obj?.report?.map(rp => {
                                     return (
                                         <div key={rp[0]}>
                                             <p>{rp[0]}</p>

@@ -65,7 +65,7 @@ export default function TeacherRoom() {
             setTime(100);
             setQuizStatus("started")
             console.log("quiz started")
-            socket.emit("start-quiz", { quizID: quiz._id });
+            socket.emit("start-quiz", { quizID: quiz._id, nanoID : quiz.nanoID });
             setIndex(0)
         }
         else {
@@ -80,7 +80,7 @@ export default function TeacherRoom() {
         if (index >= quiz.questions.length - 1) {
             console.log("quiz over")
             setQuizStatus("ended");
-            socket.emit("quiz-over", { quizID: quiz._id })
+            socket.emit("quiz-over", { quizID: quiz._id, nanoID: quiz.nanoID })
 
         } else {
             console.log("next question")
@@ -94,7 +94,7 @@ export default function TeacherRoom() {
         dispatch(clearHaveAnswered())
         setTime(0)
         setQuizStatus("ended");
-        socket.emit("quiz-over", { quizID: quiz._id })
+        socket.emit("quiz-over", { quizID: quiz._id, nanoID : quiz.nanoID })
     }
 
     //socket connections
@@ -180,6 +180,8 @@ export default function TeacherRoom() {
     return (
         <div className='teachers-room'>
             <h1>TeachersRoom</h1>
+
+            <h2>{quiz?.nanoID}</h2>
 
             <button
                 style={{ display: quizStatus === "not-started" ? "flex" : "none", background: "mediumseagreen", marginBottom: "30px" }}
