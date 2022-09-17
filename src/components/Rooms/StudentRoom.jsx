@@ -121,6 +121,9 @@ export default function Room() {
       <div style={{ display: quizStatus === "started" ? "flex" : "none" }} className="student-quiz">
         <h2>Q: {quiz?.questions[index]?.question}</h2>
 
+        {/*question Image */}
+        <img style={{ width: "300px", height: "250px", objectFit: "cover", marginBottom: "10px", border: "1px solid grey", borderRadius: "5px" }} src={quiz?.questions[index]?.image} alt="" />
+
         <div className="student-quiz-actions">
           <button disabled={time <= 0 ? true : (answered[1] === true ? true : false)}
             style={{ border: (answered[0] === quiz.questions[index]?.choices[0] && quiz.questions[index]?.choices[0] === quiz.questions[index]?.solution && time <= 0) ? "4px solid yellowgreen" : (answered[0] === quiz.questions[index]?.choices[0] && time <= 0) ? "4px solid crimson" : (answered[0] === quiz.questions[index]?.choices[0]) ? "4px solid white" : "4px solid transparent" }}

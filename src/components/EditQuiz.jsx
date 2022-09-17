@@ -6,6 +6,7 @@ import { setAlert } from '../slices/mySlice';
 import { useNavigate } from 'react-router-dom';
 import "../styles/editquiz.css"
 import { setTab } from '../slices/mySlice';
+import FileBase64 from 'react-file-base64';
 
 
 export default function EditQuiz() {
@@ -39,6 +40,7 @@ export default function EditQuiz() {
     const [choice3, setChoice3] = useState("")
     const [choice4, setChoice4] = useState("")
     const [solution, setSolution] = useState(null)
+    const [image, setImage] = useState(null)
 
     //this function shows alert box
     function alert(text, flag) {
@@ -49,11 +51,11 @@ export default function EditQuiz() {
     }
 
     const addQuestion = async () => {
-        if (newQuestion.length === 0 ) {
+        if (newQuestion.length === 0) {
             alert("A Quiz must have a question!", "error")
             return;
         }
-        if( choice1.length === 0 || choice2.length === 0){
+        if (choice1.length === 0 || choice2.length === 0) {
             alert("Choice #1 and Choice #2 cannot be empty!", "error")
             return;
         }
@@ -66,7 +68,7 @@ export default function EditQuiz() {
         choices.push(choice2);
         if (choice3.length > 0) choices.push(choice3);
         if (choice4.length > 0) choices.push(choice4);
-        let body = { question: newQuestion, choices: choices, solution: solution }
+        let body = { question: newQuestion, choices: choices, solution: solution, image: image }
 
         const reqOptions = {
             method: 'POST',
@@ -131,6 +133,12 @@ export default function EditQuiz() {
             <div className="new-question-container">
 
                 <h3>{state.currQuiz.name}</h3>
+                <img style={{ width: "200px", height: "200px", objectFit: "cover", marginTop: "10px", border: "1px solid grey", borderRadius: "5px" }} src={image} alt="" />
+                <FileBase64
+                    className="new-question-input"
+                    multiple={false}
+                    onDone={({ base64 }) => setImage(base64)} />
+
                 <input onChange={(e) => { setNewQuestion(e.target.value) }} className="new-question-input" type="text" placeholder='What is the Question?' value={newQuestion} />
 
                 <div className="choice">

@@ -9,6 +9,7 @@ import play from "../../icons/play.svg"
 import Timer from '../Timer';
 import CopyToClipboard from 'react-copy-to-clipboard';
 
+
 export default function TeacherRoom() {
     const state = useSelector((state) => state.myState);
     const dispatch = useDispatch();
@@ -223,6 +224,10 @@ export default function TeacherRoom() {
 
             <div style={{ display: quizStatus === "started" ? "flex" : "none" }} className="teacher-quiz">
                 <h2>Q: {quiz?.questions[index]?.question}</h2>
+
+                {/* Question Image */}
+                <img style={{ width: "200px", height: "200px", objectFit: "cover", marginTop: "10px", border: "1px solid grey", borderRadius: "5px" }} src={quiz?.questions[index]?.image} alt="" />
+
                 <button
                     disabled={time > 0 ? true : false}
                     style={{ gap: "10px", background: time > 0 ? "#59656b" : "mediumseagreen", margin: "20px 0", fontWeight: "bold" }}
