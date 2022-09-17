@@ -26,7 +26,8 @@ export default function TeacherRoom() {
     const [index, setIndex] = useState(0);
     const [quizStatus, setQuizStatus] = useState("not-started")
     const [report, setReport] = useState([])
-    const [time, setTime] = useState(0)
+    const [time, setTime] = useState(0);
+    const [reportGenerated, setReportGenerated] = useState(false)
 
     useEffect(() => {
         dispatch(setTab(""))
@@ -136,8 +137,44 @@ export default function TeacherRoom() {
             entries.sort((a, b) => - a[1] + b[1])
             // console.log(entries)
             setReport(entries);
+            if (report.length > 0 && quizStatus === "ended") {
+                //save report
+                console.log("Report Generated!");
+                setReportGenerated(true);
+                generateReport(entries);
+            }
+
         }
     }, [state.currQuizRoom])
+
+
+    function generateReport(entries) {
+        console.log("Sending Report to Server...")
+        let body = {
+            quiz: quiz._id,
+            teacher: state.teacher._id,
+            report: entries
+        }
+
+        const reqOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(body)
+        }
+        fetch(`http://localhost:8000/report/`, reqOptions)
+            .then(res => res.json())
+            .then(data => {
+                if (data.error) {
+                    console.log(data.error)
+                }
+                else {
+                    console.log(data.message)
+                }
+            })
+    }
+
+
+
     return (
         <div className='teachers-room'>
             <h1>TeachersRoom</h1>
