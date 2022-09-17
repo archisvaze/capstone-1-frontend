@@ -9,12 +9,14 @@ import Timer from '../Timer';
 
 
 
+
 export default function Room() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const state = useSelector(state => state.myState);
   let { quizID } = useParams();
 
+  //declare variables
   const [quiz, setQuiz] = useState({ questions: [], choices: [] })
   const [index, setIndex] = useState(0)
   const [answered, setAnswered] = useState(["", false])
@@ -23,7 +25,7 @@ export default function Room() {
   const [myScore, setMyScore] = useState(0)
   const [time, setTime] = useState(0)
 
-
+  //authorize and fetch quiz data
   useEffect(() => {
     if (state.student === null) {
       navigate("/room")
@@ -31,7 +33,7 @@ export default function Room() {
     else {
       getQuizData();
     }
-
+    // eslint-disable-next-line
   }, [])
 
   const getQuizData = async () => {
@@ -49,14 +51,14 @@ export default function Room() {
   //quiz related socket data
   useEffect(() => {
     socket.on("quiz-started", data => {
-      console.log("quiz is starting")
+      console.log("quiz started")
       setQuizStatus("started")
       setIndex(0)
       setTime(100);
     })
     socket.on('question-nexted', data => {
       setAnswered(["", false])
-      console.log("next question coming up")
+      console.log("next question")
       setIndex(data.index)
       setTime(100);
     })
@@ -64,8 +66,8 @@ export default function Room() {
       setTime(0);
       setQuizStatus("ended")
       dispatch(setCurrQuizRoom(room));
-
     })
+    // eslint-disable-next-line
   }, [])
 
   function answer(answer) {
@@ -90,11 +92,10 @@ export default function Room() {
           }
         }
       }
-      console.log(studentsReport);
-
+      // console.log(studentsReport);
       let entries = Object.entries(studentsReport);
       entries.sort((a, b) => - a[1] + b[1])
-      console.log(entries)
+      // console.log(entries)
       setReport(entries);
       for (let arr of entries) {
         if (arr[0] === state.student) {
@@ -102,9 +103,8 @@ export default function Room() {
           break;
         }
       }
-
-
     }
+    // eslint-disable-next-line
   }, [state.currQuizRoom])
 
   return (
@@ -144,11 +144,10 @@ export default function Room() {
             }}
           >{quiz.questions[index]?.choices[3]}</button>
         </div>
-
-
-
       </div>
 
+
+      {/* Show Report after quiz */}
 
       <div style={{ display: quizStatus === "ended" ? "flex" : "none" }} className="student-report">
 
@@ -172,7 +171,6 @@ export default function Room() {
             )
           })}
         </div>
-
       </div>
 
 

@@ -5,7 +5,6 @@ import { useSelector, useDispatch } from 'react-redux'
 import { setAlert } from '../slices/mySlice';
 import { useNavigate } from 'react-router-dom';
 import "../styles/editquiz.css"
-import trash from "../icons/trash.svg"
 import { setTab } from '../slices/mySlice';
 
 export default function EditQuiz() {
@@ -14,7 +13,7 @@ export default function EditQuiz() {
     const dispatch = useDispatch();
     let { id } = useParams();
 
-
+    //fetch quiz details
     useEffect(() => {
         dispatch(setTab(""))
         fetch(`http://localhost:8000/quiz/${id}`)
@@ -28,10 +27,11 @@ export default function EditQuiz() {
                     console.log(data)
                 }
             })
-
+        // eslint-disable-next-line
     }, [state.alert])
 
 
+    //declare variables
     const [newQuestion, setNewQuestion] = useState("")
     const [choice1, setChoice1] = useState("")
     const [choice2, setChoice2] = useState("")
@@ -39,13 +39,14 @@ export default function EditQuiz() {
     const [choice4, setChoice4] = useState("")
     const [solution, setSolution] = useState(null)
 
-
+    //this function shows alert box
     function alert(text, flag) {
         dispatch(setAlert([text, true, flag]))
         setTimeout(() => {
             dispatch(setAlert([text, false, flag]))
         }, 2000)
     }
+
     const addQuestion = async () => {
         if (newQuestion.length === 0 || choice1.length === 0 || choice2.length === 0) {
             alert("A Question must have atleast 2 choices!", "error")
@@ -81,6 +82,7 @@ export default function EditQuiz() {
                 }
             })
     }
+
     const removeQuestion = async (questionID) => {
         dispatch(setAlert(["Removing Question...", true, "alert"]))
         const reqOptions = {
@@ -96,7 +98,6 @@ export default function EditQuiz() {
                 }
             })
     }
-
 
     return (
         <div className='edit-quiz-page'>
@@ -152,7 +153,7 @@ export default function EditQuiz() {
                     }} className="solution">✔️</button>
                 </div>
                 <button
-                    style={{ margin: "20px", width:"50%", height: "50px", background: "#f1b238", fontSize: "16px" }}
+                    style={{ margin: "20px", width: "50%", height: "50px", background: "#f1b238", fontSize: "16px" }}
                     onClick={() => { addQuestion() }}>Add Question</button>
             </div>
         </div>

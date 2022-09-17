@@ -14,6 +14,7 @@ export default function TeacherRoom() {
     const navigate = useNavigate();
     let { quizID } = useParams();
 
+    // this function shows the alert box
     function alert(text, flag) {
         dispatch(setAlert([text, true, flag]))
         setTimeout(() => {
@@ -21,17 +22,18 @@ export default function TeacherRoom() {
         }, 2000)
     }
 
-    //varaibles
+    //declare variables
     const [quiz, setQuiz] = useState({ questions: [], choices: [] })
     const [index, setIndex] = useState(0);
     const [quizStatus, setQuizStatus] = useState("not-started")
     const [report, setReport] = useState([])
     const [time, setTime] = useState(0);
-    const [reportGenerated, setReportGenerated] = useState(false)
 
+    //fetch quiz data
     useEffect(() => {
         dispatch(setTab(""))
         getQuizData();
+        // eslint-disable-next-line
     }, [])
 
     const getQuizData = async () => {
@@ -39,8 +41,10 @@ export default function TeacherRoom() {
             .then(res => res.json())
             .then(data => {
                 if (data.error) {
+                    alert(data.error, "error")
                     navigate("/")
                 }
+                // eslint-disable-next-line
                 if (state.teacher._id == undefined || state.teacher._id !== data.teacher._id || state.isLoggedIn === false) {
                     //unauthorized access
                     dispatch(setLogout());
@@ -60,7 +64,7 @@ export default function TeacherRoom() {
             dispatch(clearHaveAnswered())
             setTime(100);
             setQuizStatus("started")
-            console.log("starting quiz...")
+            console.log("quiz started")
             socket.emit("start-quiz", { quizID: quiz._id });
             setIndex(0)
         }
@@ -77,7 +81,6 @@ export default function TeacherRoom() {
             console.log("quiz over")
             setQuizStatus("ended");
             socket.emit("quiz-over", { quizID: quiz._id })
-
 
         } else {
             console.log("next question")
@@ -115,7 +118,7 @@ export default function TeacherRoom() {
             dispatch(setCurrQuizRoom(room))
             return;
         })
-
+        // eslint-disable-next-line
     }, [])
 
 
@@ -132,7 +135,6 @@ export default function TeacherRoom() {
                 }
             }
             // console.log(studentsReport);
-
             let entries = Object.entries(studentsReport);
             entries.sort((a, b) => - a[1] + b[1])
             // console.log(entries)
@@ -140,14 +142,13 @@ export default function TeacherRoom() {
             if (report.length > 0 && quizStatus === "ended") {
                 //save report
                 console.log("Report Generated!");
-                setReportGenerated(true);
                 generateReport(entries);
             }
-
         }
+        // eslint-disable-next-line
     }, [state.currQuizRoom])
 
-
+    //generate students report after quiz
     function generateReport(entries) {
         console.log("Sending Report to Server...")
         let body = {
@@ -166,10 +167,10 @@ export default function TeacherRoom() {
             .then(res => res.json())
             .then(data => {
                 if (data.error) {
-                    console.log(data.error)
+                    alert(data.error, "error")
                 }
                 else {
-                    console.log(data.message)
+                    alert(data.message, "alert")
                 }
             })
     }
@@ -183,17 +184,17 @@ export default function TeacherRoom() {
             <button
                 style={{ display: quizStatus === "not-started" ? "flex" : "none", background: "mediumseagreen", marginBottom: "30px" }}
                 onClick={() => {
-                    {
-                        startQuiz();
-                    }
+
+                    startQuiz();
+
                 }} className="start-btn" >Start Quiz<img src={play} alt="" /></button>
 
 
             <button style={{ display: quizStatus === "started" ? "flex" : "none", marginBottom: "30px", color: "red", fontWeight: "bold" }}
                 onClick={() => {
-                    {
-                        endQuiz();
-                    }
+
+                    endQuiz();
+
                 }}
             >End Quiz</button>
 
@@ -215,9 +216,9 @@ export default function TeacherRoom() {
                     disabled={time > 0 ? true : false}
                     style={{ gap: "10px", background: time > 0 ? "#59656b" : "mediumseagreen", margin: "20px 0", fontWeight: "bold" }}
                     onClick={() => {
-                        {
-                            nextQuestion();
-                        }
+
+                        nextQuestion();
+
                     }}>Next Question<img src={play} alt="" /></button>
 
             </div>
