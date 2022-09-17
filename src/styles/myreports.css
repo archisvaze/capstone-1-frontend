@@ -10,3 +10,85 @@
 .my-reports-page {
     padding: 0 10px;
 }
+
+.rp-reports-container {
+    width: 100%;
+    margin-top: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+
+.rp-report-container {
+    width: 100%;
+    max-width: 600px;
+    margin: 20px;
+    background-color:#e7e7e7;
+    color: black;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 4px;
+    position: relative;
+    overflow: hidden;
+}
+
+.rp-delete-btn {
+    position: absolute;
+    box-shadow: none;
+    top: -1px;
+    right: -1px;
+    height: 20px;
+    width: 40px;
+    padding: 0 0 1px 0;
+    border-radius: 0;
+    border-bottom-left-radius: 5px;
+    background-color: crimson;
+}
+
+.rp-delete-btn:hover {
+    transform: none;
+    box-shadow: none;
+    background-color: rgb(226, 52, 87);
+}
+
+.rp-delete-btn:active {
+    transform: none;
+    box-shadow: none;
+}
+
+.rp-quiz-name,
+.rp-date {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.rp-date span,
+.rp-quiz-name span {
+    background-color: black;
+    color: white;
+    padding: 2px 5px;
+    font-weight: bold;
+}
+
+.rp-scoreboard {
+    font-weight: bold;
+    letter-spacing: 2px;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.rp-report {
+    background-color: #102129;
+    color: white;
+    padding: 5px 10px;
+}
+
+.rp-report div {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    padding: 5px 0;
+    border-bottom: 2px solid grey;
+}

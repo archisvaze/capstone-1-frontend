@@ -152,6 +152,7 @@ export default function TeacherRoom() {
         console.log("Sending Report to Server...")
         let body = {
             quiz: quiz._id,
+            question_count: quiz.questions.length,
             teacher: state.teacher._id,
             report: entries
         }
@@ -223,9 +224,6 @@ export default function TeacherRoom() {
 
             <div style={{ display: quizStatus === "ended" ? "flex" : "none" }} className="teacher-report">
                 <h2>Final Scores</h2>
-                <button
-                    style={{ margin: "20px 0", color: "black", fontWeight: "bold", }}
-                >Save Report</button>
                 <div className="student-score-container">
                     {report.map((arr) => {
                         return (

@@ -5,7 +5,6 @@ import { setLogout, setMyQuizes, setNewQuizDialog, setAlert, setTab } from '../s
 import MyQuizes from './MyQuizes';
 import MyReports from './MyReports';
 import "../styles/home.css"
-import cancel from "../icons/cancel.svg"
 
 
 export default function Home() {
@@ -13,6 +12,13 @@ export default function Home() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [quizName, setquizName] = useState("");
+
+  function alert(text, flag) {
+    dispatch(setAlert([text, true, flag]))
+    setTimeout(() => {
+      dispatch(setAlert([text, false, flag]))
+    }, 2000)
+  }
 
   useEffect(() => {
     if (state.isLoggedIn === false) {
@@ -31,7 +37,9 @@ export default function Home() {
     fetch(`http://localhost:8000/quiz/teacher/${state.teacher._id}`)
       .then(res => res.json())
       .then(data => {
-        if (data.error) { }
+        if (data.error) {
+          alert(data.error, "error")
+        }
         else {
           if (data?.length > 0) data.reverse();
           // console.log(data)

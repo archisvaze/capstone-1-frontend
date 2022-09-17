@@ -152,7 +152,7 @@ export default function EditQuiz() {
                     }} className="solution">✔️</button>
                 </div>
                 <button
-                    style={{ margin: "20px", height: "40px", background: "#f1b238", fontSize: "16px" }}
+                    style={{ margin: "20px", width:"50%", height: "50px", background: "#f1b238", fontSize: "16px" }}
                     onClick={() => { addQuestion() }}>Add Question</button>
             </div>
         </div>

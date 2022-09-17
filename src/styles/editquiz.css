@@ -10,7 +10,7 @@
 
 .questions-container {
     min-width: 30%;
-    padding-top: 50px;
+    padding-top: 55px;
     display: flex;
     flex-wrap: wrap;
 }
@@ -27,7 +27,8 @@
     gap: 5px;
     margin: 10px;
     border-radius: 5px;
-    border: 2px solid rgba(255, 255, 255, 0.5);
+    background-color:#e7e7e7;
+    color: black;
     padding: 20px;
     max-width: 300px;
     width: 100%;
@@ -45,11 +46,12 @@
     padding: 0 0 1px 0;
     border-radius: 0;
     border-bottom-left-radius: 5px;
-    background-color: orangered;
+    background-color: crimson;
 }
 .remove-question-btn:hover{
     transform: none;
     box-shadow: none;
+    background-color: rgb(226, 52, 87);
 }
 .remove-question-btn:active{
     transform: none;
@@ -150,7 +152,6 @@
         gap: 5px;
         margin: 10px;
         border-radius: 5px;
-        border: 2px solid rgba(255, 255, 255, 0.5);
         padding: 20px;
         max-width: 300px;
         width: fit-content;
