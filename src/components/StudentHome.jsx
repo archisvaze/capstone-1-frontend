@@ -88,8 +88,6 @@ export default function StudentHome() {
             navigate("/login")
           }}>Login</button>
       </div>
-
-
     </div>
   )
 }
