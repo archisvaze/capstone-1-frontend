@@ -8,6 +8,7 @@ header {
     justify-content: center;
     align-items: center;
     background: #192a32;
+    z-index: 10;
 }
 
 .header-container {
@@ -16,25 +17,6 @@ header {
     display: flex;
     align-items: center;
     padding: 0 10px;
-}
-
-.alert {
-    position: fixed;
-    height: 60px;
-    width: 300px;
-    color: white;
-    left: 0;
-    right: 0;
-    margin: auto;
-    transition: 0.5s;
-    z-index: 10;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 10px;
-    border-radius: 10px;
-    text-align: center;
-    box-shadow: 4px 10px 15px 4px rgba(0, 0, 0, 0.3);
 }
 
 nav{

@@ -26,7 +26,7 @@ export default function MyReports() {
     }, [state.alert])
 
     const getAllReports = async () => {
-        console.log(state)
+        // console.log(state)
         fetch(`http://localhost:8000/report/${state.teacher._id}`)
             .then(res => res.json())
             .then(data => {

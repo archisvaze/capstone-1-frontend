@@ -3,7 +3,7 @@ import "../../styles/login.css"
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { setLogin, setAlert } from '../../slices/mySlice';
+import { setAlert } from '../../slices/mySlice';
 
 export default function Signup() {
 

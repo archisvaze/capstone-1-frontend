@@ -135,7 +135,6 @@ export default function EditQuiz() {
                 <h3>{state.currQuiz.name}</h3>
                 <img style={{ width: "200px", height: "200px", objectFit: "cover", marginTop: "10px", border: "1px solid grey", borderRadius: "5px" }} src={image} alt="" />
                 <FileBase64
-                    className="new-question-input"
                     multiple={false}
                     onDone={({ base64 }) => setImage(base64)} />
 

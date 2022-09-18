@@ -166,6 +166,33 @@ input {
 }
 
 
+input[type="file"] {
+    width: 100%;
+    cursor: pointer;
+    max-width: 300px;
+    overflow: hidden;
+}
+
+.alert {
+    position: fixed;
+    height: 60px;
+    width: 300px;
+    color: white;
+    left: 0;
+    right: 0;
+    margin: auto;
+    transition: 0.5s;
+    z-index: 100;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 4px 10px 15px 4px rgba(0, 0, 0, 0.3);
+}
+
+
 /*Media Querries for mobile*/
 
 @media screen and (min-width: 0px) and (max-width: 650px) {
