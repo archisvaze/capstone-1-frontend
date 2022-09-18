@@ -26,7 +26,7 @@ export default function MyQuizes(props) {
                 style={{ background: "#f1b238", fontSize: "16px", marginTop: "20px", fontWeight: "bold", letterSpacing: "2px", gap: "15px", maxWidth: "300px", textShadow: "0px 0px 3px black" }}
                 onClick={() => {
                     dispatch(setNewQuizDialog(true))
-                }} className="create-quiz-btn"> <img style={{ width: "18px", boxShadow: "0 0 2px black" }} src={plus} alt="" />Create New Quiz</button>
+                }} className="create-quiz-btn"> <img style={{ width: "18px" }} src={plus} alt="" />Create New Quiz</button>
         </div>
     )
 }

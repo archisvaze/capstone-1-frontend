@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import socket from '../../socketConfig';
 import { setCurrQuizRoom } from '../../slices/mySlice';
 import Timer from '../Timer';
-
+import placeholder from "../../images/placeholder.svg"
 
 
 
@@ -116,7 +116,8 @@ export default function Room() {
         <h2>Q: {quiz?.questions[index]?.question}</h2>
 
         {/*question Image */}
-        <img style={{ width: "300px", height: "250px", objectFit: "cover", marginBottom: "10px", border: "1px solid grey", borderRadius: "5px" }} src={quiz?.questions[index]?.image} alt="" />
+        {quiz?.questions[index]?.image == null ? <></> : <img style={{ width: "300px", height: "250px", objectFit: "cover", marginBottom: "10px", border: "1px solid grey", borderRadius: "5px" }} src={quiz?.questions[index]?.image} alt="" />}
+
 
         <div className="student-quiz-actions">
           <button disabled={time <= 0 ? true : (answered[1] === true ? true : false)}
