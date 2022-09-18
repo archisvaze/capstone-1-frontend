@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import "../styles/editquiz.css"
 import { setTab } from '../slices/mySlice';
 import FileBase64 from 'react-file-base64';
+import placeholder from "../images/placeholder.png"
 
 
 export default function EditQuiz() {
@@ -40,7 +41,7 @@ export default function EditQuiz() {
     const [choice3, setChoice3] = useState("")
     const [choice4, setChoice4] = useState("")
     const [solution, setSolution] = useState(null)
-    const [image, setImage] = useState(null)
+    const [image, setImage] = useState(placeholder)
 
     //this function shows alert box
     function alert(text, flag) {
@@ -93,6 +94,7 @@ export default function EditQuiz() {
             setChoice3("")
             setChoice4("")
             setSolution(null)
+            setImage(placeholder)
         }
         else {
             alert(data.error, "error")
