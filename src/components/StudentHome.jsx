@@ -30,8 +30,8 @@ export default function StudentHome() {
   const [nanoID, setNanoID] = useState("");
 
   function joinRoom() {
-    dispatch(setAlert(["Connecting...", true, "error"]))
     if (name !== "" && nanoID !== "") {
+      dispatch(setAlert(["Connecting...", true, "error"]))
       socket.emit("join-room", {
         name: name,
         nanoID: nanoID,
