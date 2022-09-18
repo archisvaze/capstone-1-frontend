@@ -78,25 +78,24 @@ export default function EditQuiz() {
             },
             body: JSON.stringify(body)
         }
-        try {
-            fetch(`http://localhost:8000/quiz/${state.currQuiz._id}/newquestion`, reqOptions)
-                .then(res => res.json())
-                .then(data => {
-                    if (data.message) {
-                        alert("Question added to Quiz", "alert")
-                        setNewQuestion("")
-                        setChoice1("")
-                        setChoice2("")
-                        setChoice3("")
-                        setChoice4("")
-                        setSolution(null)
-                    }
-                    else {
-                        alert(data, "error")
-                    }
-                })
-        } catch (error) {
-            alert(error, "error")
+
+        let res = await fetch(`http://localhost:8000/quiz/${state.currQuiz._id}/newquestion`, reqOptions)
+        if (res.status === 413) {
+            alert("Image is too large, image must be less than 1MB", "error")
+            return;
+        }
+        let data = await res.json()
+        if (data.message) {
+            alert("Question added to Quiz", "alert")
+            setNewQuestion("")
+            setChoice1("")
+            setChoice2("")
+            setChoice3("")
+            setChoice4("")
+            setSolution(null)
+        }
+        else {
+            alert(data.error, "error")
         }
 
     }
