@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from "react-router-dom";
 import socket from '../socketConfig';
-import { setStudent, setAlert, setLogout } from '../slices/mySlice';
+import { setStudent, setAlert, setLogout, setQuizData } from '../slices/mySlice';
 import "../styles/studenthome.css"
 
 
@@ -47,6 +47,7 @@ export default function StudentHome() {
       setName("");
       setNanoID("")
       dispatch(setStudent(data.name))
+      dispatch(setQuizData(data.quizData))
       navigate(`/room/${data.quizID}`)
       alert("Quiz Room Joined!", "alert")
     })

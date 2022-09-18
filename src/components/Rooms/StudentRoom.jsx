@@ -36,17 +36,11 @@ export default function Room() {
     // eslint-disable-next-line
   }, [])
 
-  const getQuizData = async () => {
-    fetch(`http://localhost:8000/quiz/${quizID}`)
-      .then(res => res.json())
-      .then(data => {
-        if (data.error) { }
-        else {
-          console.log(data)
-          setQuiz(data)
-        }
-      })
+  const getQuizData = () => {
+    setQuiz(state.quizData)
   }
+
+
 
   //quiz related socket data
   useEffect(() => {
@@ -112,7 +106,7 @@ export default function Room() {
 
       <button onClick={() => {
         window.open("http://localhost:3000", "_self")
-      }}  className="back-btn">	&#129052; Back</button>
+      }} className="back-btn">	&#129052; Back</button>
 
       <h1>{state.student}'s Room</h1>
 

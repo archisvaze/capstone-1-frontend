@@ -32,11 +32,18 @@ export default function Home() {
   }, [state.alert])
 
   const getAllQuizes = async () => {
-    fetch(`http://localhost:8000/quiz/teacher/${state.teacher._id}`)
+
+    const reqParams = {
+      method: "get",
+      headers: { "Authorization": `Bearer ${state.teacher.token}` }
+    }
+
+    fetch(`http://localhost:8000/quiz/teacher/${state.teacher._id}`, reqParams)
       .then(res => res.json())
       .then(data => {
         if (data.error) {
-          alert(data.error, "error")
+          console.log(data.error)
+          // alert(data.error, "error")
         }
         else {
           if (data?.length > 0) data.reverse();
@@ -50,7 +57,10 @@ export default function Home() {
   const createNewQuiz = async () => {
     const reqOptions = {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+        "Authorization": `Bearer ${state.teacher.token}`
+      },
       body: JSON.stringify({ name: quizName, teacher: state.teacher._id })
     }
 

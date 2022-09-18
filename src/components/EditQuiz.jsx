@@ -18,7 +18,7 @@ export default function EditQuiz() {
     //fetch quiz details
     useEffect(() => {
         dispatch(setTab(""))
-        fetch(`http://localhost:8000/quiz/${id}`)
+        fetch(`http://localhost:8000/quiz/${id}`, { method: "get", headers: { "Authorization": `Bearer ${state.teacher.token}` } })
             .then(res => res.json())
             .then(data => {
                 if (data.error) {
@@ -72,29 +72,43 @@ export default function EditQuiz() {
 
         const reqOptions = {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: {
+                'Content-Type': 'application/json',
+                "Authorization": `Bearer ${state.teacher.token}`
+            },
             body: JSON.stringify(body)
         }
-        fetch(`http://localhost:8000/quiz/${state.currQuiz._id}/newquestion`, reqOptions)
-            .then(res => res.json())
-            .then(data => {
-                if (data.message) {
-                    alert("Question added to Quiz", "alert")
-                    setNewQuestion("")
-                    setChoice1("")
-                    setChoice2("")
-                    setChoice3("")
-                    setChoice4("")
-                    setSolution(null)
-                }
-            })
+        try {
+            fetch(`http://localhost:8000/quiz/${state.currQuiz._id}/newquestion`, reqOptions)
+                .then(res => res.json())
+                .then(data => {
+                    if (data.message) {
+                        alert("Question added to Quiz", "alert")
+                        setNewQuestion("")
+                        setChoice1("")
+                        setChoice2("")
+                        setChoice3("")
+                        setChoice4("")
+                        setSolution(null)
+                    }
+                    else {
+                        alert(data, "error")
+                    }
+                })
+        } catch (error) {
+            alert(error, "error")
+        }
+
     }
 
     const removeQuestion = async (questionID) => {
         dispatch(setAlert(["Removing Question...", true, "alert"]))
         const reqOptions = {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: {
+                'Content-Type': 'application/json',
+                "Authorization": `Bearer ${state.teacher.token}`
+            },
             body: JSON.stringify({ questionID: questionID })
         }
         fetch(`http://localhost:8000/quiz/${state.currQuiz._id}/removequestion`, reqOptions)

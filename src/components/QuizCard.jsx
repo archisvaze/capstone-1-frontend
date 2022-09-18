@@ -26,7 +26,7 @@ export default function QuizCard(props) {
 
     const deleteQuiz = async () => {
         dispatch(setAlert(["Deleting Quiz...", true, "alert"]))
-        fetch(`http://localhost:8000/quiz/delete/${obj._id}`)
+        fetch(`http://localhost:8000/quiz/delete/${obj._id}`, { method: "get", headers: { "Authorization": `Bearer ${state.teacher.token}` } })
             .then(res => res.json())
             .then(data => {
                 if (data.message) {
@@ -47,7 +47,7 @@ export default function QuizCard(props) {
         else {
             dispatch(setCurrQuizRoom({ students: [], report: [] }))
             console.log("destroying previous room")
-            socket.emit("destroy-room", { quiz: obj, clientID: state.clientID , nanoID : obj.nanoID});
+            socket.emit("destroy-room", { quiz: obj, clientID: state.clientID, nanoID: obj.nanoID });
             socket.emit("create-room", { quiz: obj, clientID: state.clientID, nanoID: obj.nanoID })
         }
     }

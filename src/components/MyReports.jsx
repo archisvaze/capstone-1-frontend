@@ -27,7 +27,7 @@ export default function MyReports() {
 
     const getAllReports = async () => {
         // console.log(state)
-        fetch(`http://localhost:8000/report/${state.teacher._id}`)
+        fetch(`http://localhost:8000/report/${state.teacher._id}`, { method: "get", headers: { "Authorization": `Bearer ${state.teacher.token}` } })
             .then(res => res.json())
             .then(data => {
                 if (data.error) {
@@ -51,7 +51,7 @@ export default function MyReports() {
 
     const deleteReport = async (reportID) => {
         dispatch(setAlert(["Deleting Report...", true, "alert"]))
-        fetch(`http://localhost:8000/report/delete/${reportID}`)
+        fetch(`http://localhost:8000/report/delete/${reportID}`, { method: "get", headers: { "Authorization": `Bearer ${state.teacher.token}` } })
             .then(res => res.json())
             .then(data => {
                 if (data.message) {

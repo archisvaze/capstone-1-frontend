@@ -16,6 +16,7 @@ startState = {
     currQuizRoom: { students: [] },
     clientID: "",
     haveAnswered: [],
+    quizData: {}
 };
 if (localStorage.getItem("teacher-data")) {
     startState.teacher = JSON.parse(localStorage.getItem("teacher-data"));
@@ -74,6 +75,9 @@ const mySlice = createSlice({
         },
         clearHaveAnswered: (state, action) => {
             state.haveAnswered = [];
+        },
+        setQuizData: (state, action) => {
+            state.quizData = action.payload
         }
     }
 })
@@ -92,6 +96,7 @@ export const {
     setCurrQuizRoom,
     addtoHaveAnswered,
     clearHaveAnswered,
+    setQuizData,
 
 
 } = mySlice.actions;

@@ -39,7 +39,7 @@ export default function TeacherRoom() {
     }, [])
 
     const getQuizData = async () => {
-        fetch(`http://localhost:8000/quiz/${quizID}`)
+        fetch(`http://localhost:8000/quiz/${quizID}`, { method: "get", headers: { "Authorization": `Bearer ${state.teacher.token}` } })
             .then(res => res.json())
             .then(data => {
                 if (data.error) {
@@ -162,7 +162,7 @@ export default function TeacherRoom() {
 
         const reqOptions = {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: { 'Content-Type': 'application/json', "Authorization": `Bearer ${state.teacher.token}` },
             body: JSON.stringify(body)
         }
         fetch(`http://localhost:8000/report/`, reqOptions)
