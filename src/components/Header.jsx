@@ -1,13 +1,20 @@
 import React from 'react';
 import "../styles/header.css"
 import { useSelector, useDispatch } from 'react-redux';
-import { setTab, setLogout } from '../slices/mySlice';
+import { setTab, setLogout, setAlert } from '../slices/mySlice';
 import { useNavigate } from 'react-router-dom';
 
 export default function Header() {
     const state = useSelector((state) => state.myState)
     const dispatch = useDispatch();
     const navigate = useNavigate();
+
+    function alert(text, flag) {
+        dispatch(setAlert([text, true, flag]))
+        setTimeout(() => {
+            dispatch(setAlert([text, false, flag]))
+        }, 2000)
+    }
     return (
         <header>
             <div
@@ -32,8 +39,11 @@ export default function Header() {
                 </nav>
                 <button
                     onClick={() => {
-                        dispatch(setLogout())
-                        navigate("/login")
+                        alert("Logging Out...", "error")
+                        setTimeout(() => {
+                            dispatch(setLogout())
+                            navigate("/login")
+                        }, 1000)
                     }}
                     style={{ display: state.isLoggedIn === true ? "flex" : "none", fontSize: "12px", background: "crimson" }} className="logout-btn">Logout</button>
             </div>
