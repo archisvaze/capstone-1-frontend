@@ -26,9 +26,9 @@ export default function Timer(props) {
     }, [time])
 
 
-    if (time <= 20) color = "red";
-    if (time >= 21 && time <= 50) color = "yellow";
-    if (time >= 51) color = "yellowgreen"
+    if (time <= 20) color = "crimson";
+    if (time >= 21 && time <= 50) color = "#f1b238";
+    if (time >= 51) color = "mediumseagreen"
 
     return (
         <div style={{ display: quizStatus === "started" ? "flex" : "none" }} className='timer'>
