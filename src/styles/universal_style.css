@@ -2,6 +2,7 @@
 @import url("https://cdn.jsdelivr.net/npm/@xz/fonts@1/serve/cascadia-code.min.css");
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap');
 
 * {
     margin: 0;
@@ -14,7 +15,7 @@ body {
     min-height: 100vh;
     display: flex;
     justify-content: center;
-    background: #192a32;
+    background: #0c1418;
     color: white;
     overflow-x: hidden;
     overflow-y: auto;
@@ -40,8 +41,13 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
+    align-items: center;
     width: 100%;
     max-width: 1440px;
+}
+
+.my-quizes-page h2, .my-reports-page h2{
+    align-self: flex-start;
 }
 
 .new-quiz-filter {
@@ -54,25 +60,6 @@ body {
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     z-index: 2;
-}
-
-.edit-quiz-dialog {
-    padding: 30px;
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    margin: auto;
-    height: fit-content;
-    width: fit-content;
-    border: 2px solid black;
-    background-color: white;
-    z-index: 4;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
 }
 
 button {
@@ -108,7 +95,7 @@ input {
     height: 50px;
     max-width: 600px;
     border: none;
-    background-color: #274250;
+    background-color: #2e4f5f;
     padding: 10px 20px;
     border-radius: 10px;
     outline: none;
@@ -117,6 +104,9 @@ input {
     margin-bottom: 9px;
     font-size: 16px;
     box-shadow: 0 9px #102129;
+}
+input::placeholder{
+    color: rgba(255, 255, 255, 0.75);
 }
 
 .new-quiz-dialog {
@@ -132,11 +122,11 @@ input {
     width: 75vw;
     max-height: 400px;
     max-width: 400px;
-    background-color: #192a32;
+    background: #0c1418;
     z-index: 4;
     display: flex;
     flex-direction: column;
-    align-items: stretch;
+    align-items: center;
     justify-content: center;
     gap: 20px;
     box-shadow: 5px 10px 15px 4px rgba(0, 0, 0, 0.3);
@@ -151,6 +141,7 @@ input {
 
 .new-quiz-dialog input {
     width: 100%;
+    font-size: 18px;
 }
 
 .timer {

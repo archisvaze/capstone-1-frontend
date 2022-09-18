@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import socket from '../socketConfig';
 import { setStudent, setAlert, setLogout, setQuizData } from '../slices/mySlice';
 import "../styles/studenthome.css"
+import main from "../images/main.svg"
 
 
 export default function StudentHome() {
@@ -68,11 +69,13 @@ export default function StudentHome() {
   return (
     <div className='student-home'>
 
+      <img style={{width: "300px"}} src={main} alt="" />
+
       <div className="main">
         <input onChange={(e) => setName(e.target.value)} type="text" placeholder='Enter Your Name' value={name} />
         <input onChange={(e) => setNanoID(e.target.value)} type="text" placeholder='Enter Room ID' value={nanoID} />
         <button
-          style={{ backgroundColor: "#2dc4c0", fontSize: "16px" }}
+          style={{ backgroundColor: "mediumseagreen", fontSize: "16px" }}
           onClick={() => {
 
             joinRoom();

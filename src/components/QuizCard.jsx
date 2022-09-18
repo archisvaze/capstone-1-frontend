@@ -68,7 +68,7 @@ export default function QuizCard(props) {
                 <p>Number of Questions: {obj.questions.length}</p>
             </div>
 
-            <button style={{ background: "mediumseagreen" }} onClick={() => {
+            <button style={{ background: "mediumseagreen", textShadow: "0px 0px 3px black" }} onClick={() => {
 
                 createRoom();
 

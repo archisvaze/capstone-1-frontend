@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import "../styles/editquiz.css"
 import { setTab } from '../slices/mySlice';
 import FileBase64 from 'react-file-base64';
-import placeholder from "../images/placeholder.png"
+import placeholder from "../images/placeholder.svg"
 
 
 export default function EditQuiz() {
@@ -67,9 +67,10 @@ export default function EditQuiz() {
         let choices = [];
         choices.push(choice1);
         choices.push(choice2);
+
         if (choice3.length > 0) choices.push(choice3);
         if (choice4.length > 0) choices.push(choice4);
-        let body = { question: newQuestion, choices: choices, solution: solution, image: image }
+        let body = { question: newQuestion, choices: choices, solution: solution, image: image === placeholder ? null : image }
 
         const reqOptions = {
             method: 'POST',

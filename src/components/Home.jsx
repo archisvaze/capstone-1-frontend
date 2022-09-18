@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { setLogout, setMyQuizes, setNewQuizDialog, setAlert, setTab } from '../slices/mySlice';
 import MyQuizes from './MyQuizes';
 import MyReports from './MyReports';
+import question_img from "../images/question.svg"
 
 export default function Home() {
   const state = useSelector((state) => state.myState);
@@ -94,6 +95,8 @@ export default function Home() {
       <div style={{ display: state.newQuizDialog === true ? "flex" : "none" }} className="new-quiz-dialog">
 
         <h3 style={{ textAlign: "center" }}>Create A New Quiz</h3>
+
+        <img style={{width: "150px"}} src={question_img} alt="" />
 
         <input onChange={(e) => {
           e.stopPropagation();
