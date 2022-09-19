@@ -168,9 +168,9 @@ export default function EditQuiz() {
 
                             <div className="move-question-container">
 
-                                <button disabled={index === state.currQuiz.questions.length - 1 ? true : false} onClick={() => { moveDOWN(question._id) }} className="move-down"> <img src={down} alt="" /></button>
+                                <button disabled={state.alert[1] === true ? true : index === state.currQuiz.questions.length - 1 ? true : false} onClick={() => { moveDOWN(question._id) }} className="move-down"> <img src={down} alt="" /></button>
 
-                                <button disabled={index === 0 ? true : false} onClick={() => { moveUP(question._id) }} className="move-up"> <img src={up} alt="" /></button>
+                                <button disabled={state.alert[1] === true ? true : index === 0 ? true : false} onClick={() => { moveUP(question._id) }} className="move-up"> <img src={up} alt="" /></button>
 
                             </div>
                         </div>
