@@ -8,7 +8,6 @@ import "../../styles/room.css"
 import play from "../../icons/play.svg"
 import Timer from '../Timer';
 import CopyToClipboard from 'react-copy-to-clipboard';
-import placeholder from "../../images/placeholder.svg"
 
 export default function TeacherRoom() {
     const state = useSelector((state) => state.myState);

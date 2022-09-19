@@ -71,10 +71,8 @@ export default function Home() {
         if (data.message) {
           dispatch(setNewQuizDialog(false));
           setquizName("")
-          dispatch(setAlert(["New Quiz Created", true, "alert"]))
-          setTimeout(() => {
-            dispatch(setAlert(["New Quiz Created", false, "alert"]))
-          }, 2000)
+          alert("New Quiz Created", "alert");
+          navigate(`/${data.message}`)
         }
         else {
           console.log(data)
@@ -96,7 +94,7 @@ export default function Home() {
 
         <h3 style={{ textAlign: "center" }}>Create A New Quiz</h3>
 
-        <img style={{width: "150px"}} src={question_img} alt="" />
+        <img style={{ width: "150px" }} src={question_img} alt="" />
 
         <input onChange={(e) => {
           e.stopPropagation();
