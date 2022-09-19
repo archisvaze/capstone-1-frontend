@@ -6,9 +6,11 @@
     max-width: 1440px;
     align-items: center;
 }
-.my-quizes-page{
+
+.my-quizes-page {
     padding: 0 10px;
 }
+
 .quiz-card {
     display: flex;
     justify-content: space-between;
@@ -27,7 +29,7 @@
     gap: 20px;
 }
 
-.quiz-date{
+.quiz-date {
     margin: 0;
     padding: 0;
     font-size: 13px;
