@@ -66,6 +66,7 @@ export default function QuizCard(props) {
             <div className="quiz-info">
                 <h3 className="quiz-title">{obj.name}</h3>
                 <p>Number of Questions: {obj.questions.length}</p>
+                <p className='quiz-date'>Date: {obj.createdAt.split("T")[0]}</p>
             </div>
 
             <button style={{ background: "mediumseagreen", textShadow: "0px 0px 3px black" }} onClick={() => {

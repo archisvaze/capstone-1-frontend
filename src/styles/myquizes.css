@@ -27,3 +27,11 @@
     gap: 20px;
 }
 
+.quiz-date{
+    margin: 0;
+    padding: 0;
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    color: rgb(180, 180, 180);
+}
