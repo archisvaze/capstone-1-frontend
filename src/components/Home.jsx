@@ -72,7 +72,6 @@ export default function Home() {
           dispatch(setNewQuizDialog(false));
           setquizName("")
           alert("New Quiz Created", "alert");
-          navigate(`/${data.message}`)
         }
         else {
           console.log(data)
