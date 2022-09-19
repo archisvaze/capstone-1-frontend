@@ -2,10 +2,11 @@
 
 ## MCQ-Ace is a platform where teachers can create personalized multiple choice questions and host live quiz sessions, students can join the quiz and comepete by answering the questions.
 
-## Tech StacK :
+## Tech Stack :
 - Frontend: ReactJS, custom CSS, Redux, Formik
 - Backend: NodeJS, ExpressJS, MongoDB, Socket.io
 
+## Screenshots: 
 
 - The teacher can create an account using email and password and see all the quizes he/she has created.
 ![Screenshot 2022-09-19 143654](https://user-images.githubusercontent.com/92965519/190987752-2d5759f7-883d-475e-83e8-bff115ed6557.png)
