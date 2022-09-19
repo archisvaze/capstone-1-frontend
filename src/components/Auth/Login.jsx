@@ -26,7 +26,7 @@ export default function Login() {
       body: JSON.stringify(values)
     }
 
-    fetch("https://mcq-ace.herokuapp.com/auth/login", reqOptions)
+    fetch("https://mcq-ace.onrender.com/auth/login", reqOptions)
       .then(res => res.json())
       .then(data => {
         if (data.error) {
