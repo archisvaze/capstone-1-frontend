@@ -1,6 +1,6 @@
 # MCQ-Ace
 
-## This app is a platform where teachers can create personalized multiple choice questions and host a live quiz, students can join the quiz and comepete by answering the questions.
+## MCQ-Ace is a platform where teachers can create personalized multiple choice questions and host live quiz sessions, students can join the quiz and comepete by answering the questions.
 
 ## Tech StacK :
 - Frontend: ReactJS, custom CSS, Redux, Formik
