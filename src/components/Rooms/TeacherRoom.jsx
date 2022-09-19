@@ -39,7 +39,7 @@ export default function TeacherRoom() {
     }, [])
 
     const getQuizData = async () => {
-        fetch(`http://localhost:8000/quiz/${quizID}`, { method: "get", headers: { "Authorization": `Bearer ${state.teacher.token}` } })
+        fetch(`https://mcq-ace.herokuapp.com/quiz/${quizID}`, { method: "get", headers: { "Authorization": `Bearer ${state.teacher.token}` } })
             .then(res => res.json())
             .then(data => {
                 if (data.error) {
@@ -165,7 +165,7 @@ export default function TeacherRoom() {
             headers: { 'Content-Type': 'application/json', "Authorization": `Bearer ${state.teacher.token}` },
             body: JSON.stringify(body)
         }
-        fetch(`http://localhost:8000/report/`, reqOptions)
+        fetch(`https://mcq-ace.herokuapp.com/report/`, reqOptions)
             .then(res => res.json())
             .then(data => {
                 if (data.error) {

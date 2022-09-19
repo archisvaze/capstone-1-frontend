@@ -105,7 +105,7 @@ export default function Room() {
     <div className='student-room'>
 
       <button onClick={() => {
-        window.open("http://localhost:3000", "_self")
+        window.open("https://mcqace.netlify.app/", "_self")
       }} className="back-btn">	&#129052; Back</button>
 
       <h1>{state.student}'s Room</h1>
