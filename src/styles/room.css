@@ -9,6 +9,7 @@
     max-width: 1440px;
     align-items: center;
     position: relative;
+    padding-bottom: 20px;
 }
 
 .student-quiz,
