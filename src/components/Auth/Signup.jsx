@@ -30,7 +30,7 @@ export default function Signup() {
             })
         }
 
-        fetch("https://mcq-ace.herokuapp.com/auth/signup", reqOptions)
+        fetch("http://localhost:8000/auth/signup", reqOptions)
             .then(res => res.json())
             .then(data => {
                 if (data.error) {

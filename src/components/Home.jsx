@@ -39,7 +39,7 @@ export default function Home() {
       headers: { "Authorization": `Bearer ${state.teacher.token}` }
     }
 
-    fetch(`https://mcq-ace.herokuapp.com/quiz/teacher/${state.teacher._id}`, reqParams)
+    fetch(`http://localhost:8000/quiz/teacher/${state.teacher._id}`, reqParams)
       .then(res => res.json())
       .then(data => {
         if (data.error) {
@@ -65,7 +65,7 @@ export default function Home() {
       body: JSON.stringify({ name: quizName, teacher: state.teacher._id })
     }
 
-    fetch(`https://mcq-ace.herokuapp.com/quiz`, reqOptions)
+    fetch(`http://localhost:8000/quiz`, reqOptions)
       .then(res => res.json())
       .then(data => {
         if (data.message) {

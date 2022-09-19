@@ -26,7 +26,7 @@ export default function QuizCard(props) {
 
     const deleteQuiz = async () => {
         dispatch(setAlert(["Deleting Quiz...", true, "alert"]))
-        fetch(`https://mcq-ace.herokuapp.com/quiz/delete/${obj._id}`, { method: "get", headers: { "Authorization": `Bearer ${state.teacher.token}` } })
+        fetch(`http://localhost:8000/quiz/delete/${obj._id}`, { method: "get", headers: { "Authorization": `Bearer ${state.teacher.token}` } })
             .then(res => res.json())
             .then(data => {
                 if (data.message) {

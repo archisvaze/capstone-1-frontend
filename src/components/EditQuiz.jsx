@@ -19,7 +19,7 @@ export default function EditQuiz() {
     //fetch quiz details
     useEffect(() => {
         dispatch(setTab(""))
-        fetch(`https://mcq-ace.herokuapp.com/quiz/${id}`, { method: "get", headers: { "Authorization": `Bearer ${state.teacher.token}` } })
+        fetch(`"http://localhost:8000/quiz/${id}`, { method: "get", headers: { "Authorization": `Bearer ${state.teacher.token}` } })
             .then(res => res.json())
             .then(data => {
                 if (data.error) {
@@ -81,7 +81,7 @@ export default function EditQuiz() {
             body: JSON.stringify(body)
         }
 
-        let res = await fetch(`https://mcq-ace.herokuapp.com/quiz/${state.currQuiz._id}/newquestion`, reqOptions)
+        let res = await fetch(`"http://localhost:8000/quiz/${state.currQuiz._id}/newquestion`, reqOptions)
         if (res.status === 413) {
             alert("Image is too large, image must be less than 1MB", "error")
             return;
@@ -113,7 +113,7 @@ export default function EditQuiz() {
             },
             body: JSON.stringify({ questionID: questionID })
         }
-        fetch(`https://mcq-ace.herokuapp.com/quiz/${state.currQuiz._id}/removequestion`, reqOptions)
+        fetch(`"http://localhost:8000/quiz/${state.currQuiz._id}/removequestion`, reqOptions)
             .then(res => res.json())
             .then(data => {
                 if (data.message) {
