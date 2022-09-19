@@ -1,6 +1,30 @@
-# Getting Started with Create React App
+# MCQ-Ace
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## This app is a platform where teachers can create personalized multiple choice questions and host a live quiz, students can join the quiz and comepete by answering the questions.
+
+## Tech StacK :
+- Frontend: ReactJS, custom CSS, Redux, Formik
+- Backend: NodeJS, ExpressJS, MongoDB, Socket.io
+
+
+- The teacher can create an account using email and password and see all the quizes he/she has created.
+![Screenshot 2022-09-19 143654](https://user-images.githubusercontent.com/92965519/190987752-2d5759f7-883d-475e-83e8-bff115ed6557.png)
+
+- The teacher can create a quiz and add questions. The teacher can add the 'question text', 'image', 'choices text' and 'mark the correct answer'. The teacher can control the order of the questions that will appear to the audience, or delete them from question preview side bar.
+![Screenshot 2022-09-19 143803](https://user-images.githubusercontent.com/92965519/190987770-e043ba11-fc60-46fd-9e9e-5b0b6be5cf54.png)
+
+- The teacher can chose any quiz and click the start button. When the teacher starts the session, a game screen will be shown along with unique numeric number that can identify the game room easily. This numeric pin will be used by the students to join the room.
+![Screenshot 2022-09-19 143953](https://user-images.githubusercontent.com/92965519/190987982-a3c50dd4-1fb3-47ac-93ba-7094ddf43161.png)
+
+- When the teacher presses 'Start', the questions will be shown with a timer and each one of the student can see the questions and can choose the choices from their own device (Phone or Laptop)
+![Screenshot 2022-09-19 144056](https://user-images.githubusercontent.com/92965519/190988124-ab2d6d85-4377-476c-aa02-b01e7b0ea45b.png)
+
+- After the game session, there will be a dashboard screen showing the attendees with their scoring and they are sorted based on their score. The students can see the top 3 students and their own score.
+
+
+- A report card is automatically generated and stored in the Reports Tab on the home page. The teacher can view the reports for all quizes and delete any report.
+
+
 
 ## Available Scripts
 
@@ -13,58 +37,3 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
 The page will reload when you make changes.\
 You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
