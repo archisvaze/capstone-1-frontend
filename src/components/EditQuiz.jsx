@@ -30,7 +30,7 @@ export default function EditQuiz() {
                 }
                 else {
                     dispatch(setCurrQuiz(data))
-                    console.log(data)
+                    // console.log(data)
                 }
             })
         // eslint-disable-next-line
