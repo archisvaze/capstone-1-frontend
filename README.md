@@ -2,6 +2,8 @@
 
 ## MCQ-Ace is a platform where teachers can create personalized multiple choice questions and host live quiz sessions, students can join the quiz and comepete by answering the questions.
 
+Link: https://mcqace.netlify.app/
+
 ## Tech Stack :
 - Frontend: ReactJS, custom CSS, Redux, Formik
 - Backend: NodeJS, ExpressJS, MongoDB, Socket.io
