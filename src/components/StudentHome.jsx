@@ -62,6 +62,10 @@ export default function StudentHome() {
       console.log("Quiz in Progess on Ended")
       alert("The Quiz is already in progess or has ended", "error")
     })
+    socket.on("room-not-available", data => {
+      console.log("Room not Available")
+      alert("Quiz Room is NOT available, Please ask your teacher to re-create the room", "error")
+    })
     // eslint-disable-next-line
   }, [])
 
