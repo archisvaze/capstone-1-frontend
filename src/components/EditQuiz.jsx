@@ -8,6 +8,9 @@ import "../styles/editquiz.css"
 import { setTab } from '../slices/mySlice';
 import FileBase64 from 'react-file-base64';
 import placeholder from "../images/placeholder.svg"
+import trash from "../icons/trash.svg"
+import up from "../icons/up.svg"
+import down from "../icons/down.svg"
 
 
 export default function EditQuiz() {
@@ -82,7 +85,7 @@ export default function EditQuiz() {
         }
 
         let res = await fetch(`https://mcq-ace.onrender.com/quiz/${state.currQuiz._id}/newquestion`, reqOptions)
-        if (res.status === 413) {
+        if (res.status !== 200) {
             alert("Image is too large, image must be less than 1MB", "error")
             return;
         }
@@ -122,6 +125,27 @@ export default function EditQuiz() {
             })
     }
 
+    const moveUP = async (questionID) => {
+        fetch(`https://mcq-ace.onrender.com/quiz/${state.currQuiz._id}/move-question-up/${questionID}`, { method: "get", headers: { "Authorization": `Bearer ${state.teacher.token}` } })
+            .then(res => res.json())
+            .then(data => {
+                if (data.error) { }
+                else {
+                    alert("Question moved UP!", "alert")
+                }
+            })
+    }
+    const moveDOWN = async (questionID) => {
+        fetch(`https://mcq-ace.onrender.com/quiz/${state.currQuiz._id}/move-question-down/${questionID}`, { method: "get", headers: { "Authorization": `Bearer ${state.teacher.token}` } })
+            .then(res => res.json())
+            .then(data => {
+                if (data.error) { }
+                else {
+                    alert("Question moved DOWN!", "alert")
+                }
+            })
+    }
+
     return (
         <div className='edit-quiz-page'>
             <button onClick={() => {
@@ -129,7 +153,7 @@ export default function EditQuiz() {
                 navigate("/home")
             }} className="teacher-back-btn">&#129052; Back</button>
             <div className="questions-container">
-                {state.currQuiz.questions.map(question => {
+                {state.currQuiz.questions.map((question, index) => {
                     return (
                         <div key={question._id} className="question">
                             <p>Q: {question.question}</p>
@@ -140,7 +164,15 @@ export default function EditQuiz() {
                                     )
                                 })}
                             </div> */}
-                            <button className='remove-question-btn' onClick={() => { removeQuestion(question._id) }}>X</button>
+                            <button className='remove-question-btn' onClick={() => { removeQuestion(question._id) }}> <img src={trash} alt="" /></button>
+
+                            <div className="move-question-container">
+
+                                <button disabled={index === state.currQuiz.questions.length - 1 ? true : false} onClick={() => { moveDOWN(question._id) }} className="move-down"> <img src={down} alt="" /></button>
+
+                                <button disabled={index === 0 ? true : false} onClick={() => { moveUP(question._id) }} className="move-up"> <img src={up} alt="" /></button>
+
+                            </div>
                         </div>
                     )
                 })}

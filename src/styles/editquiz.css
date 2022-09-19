@@ -28,7 +28,7 @@
     gap: 5px;
     margin: 10px 20px;
     border-radius: 5px;
-    background-color:#e7e7e7;
+    background-color: #e7e7e7;
     color: black;
     padding: 20px;
     max-width: 300px;
@@ -40,21 +40,22 @@
 .remove-question-btn {
     position: absolute;
     box-shadow: none;
-    top: -1px;
-    right: -1px;
-    height: 20px;
-    width: 40px;
+    top: 2px;
+    right: 2px;
+    height: 25px;
+    width: 25px;
     padding: 0 0 1px 0;
-    border-radius: 0;
-    border-bottom-left-radius: 5px;
-    background-color: crimson;
+    border-radius: 50px;
+    background-color: #e7e7e7;
 }
-.remove-question-btn:hover{
+
+.remove-question-btn:hover {
     transform: none;
     box-shadow: none;
-    background-color: rgb(226, 52, 87);
+    background-color: #c4c4c4;
 }
-.remove-question-btn:active{
+
+.remove-question-btn:active {
     transform: none;
     box-shadow: none;
 }
@@ -116,7 +117,33 @@
     max-width: none;
 }
 
+.move-question-container {
+    margin-top: 10px;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    gap: 10px;
+}
 
+.move-up,
+.move-down {
+    height: 25px;
+    width: 25px;
+    border-radius: 50px;
+    transform: none;
+    box-shadow: none;
+    border: 1px solid rgb(122, 122, 122);
+}
+
+.move-up:hover, .move-down:hover {
+    transform: none;
+    box-shadow: none;
+}
+
+.move-up:active, .move-down:active {
+    transform: none;
+    box-shadow: none;
+}
 
 /*Media Querries for mobile*/
 

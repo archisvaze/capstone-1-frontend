@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { setLogout, setAlert } from '../slices/mySlice';
 import "../styles/myreports.css"
+import trash from "../icons/trash.svg"
 
 export default function MyReports() {
     const state = useSelector((state) => state.myState);
@@ -73,7 +74,7 @@ export default function MyReports() {
 
                             <button onClick={() => {
                                 deleteReport(obj?._id)
-                            }} className="rp-delete-btn">X</button>
+                            }} className="rp-delete-btn"> <img src={trash} alt="" /></button>
 
 
                             {/* Report Card */}
