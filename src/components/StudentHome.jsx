@@ -22,6 +22,17 @@ export default function StudentHome() {
 
   useEffect(() => {
     dispatch(setLogout());
+    dispatch(setAlert(["Connecting to Server please wait...", true, "error"]))
+    fetch("https://mcq-ace.onrender.com/")
+      .then(res => res.json())
+      .then(data => {
+        console.log(data);
+        setTimeout(() => {
+          dispatch(setAlert(["Connected", false, "alert"]))
+        }, 1000)
+      })
+
+
     // eslint-disable-next-line
   }, [])
 
@@ -73,7 +84,7 @@ export default function StudentHome() {
   return (
     <div className='student-home'>
 
-      <img style={{width: "300px"}} src={main} alt="" />
+      <img style={{ width: "300px" }} src={main} alt="" />
 
       <div className="main">
         <input onChange={(e) => setName(e.target.value)} type="text" placeholder='Enter Your Name' value={name} />
