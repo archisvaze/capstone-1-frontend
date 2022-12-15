@@ -180,9 +180,9 @@
 
 .back-btn {
     position: absolute;
-    top: 20px;
-    left: 20px;
-    z-index: 10;
+    top: 85px;
+    left: 0px;
+    z-index: 120;
     color: black;
     font-weight: bold;
     margin-left: 10px;
@@ -190,9 +190,9 @@
 
 .teacher-back-btn {
     position: absolute;
-    top: 120px;
-    left: 10px;
-    z-index: 10;
+    top: 85px;
+    left: 0px;
+    z-index: 120;
     color: black;
     font-weight: bold;
     margin-left: 10px;
